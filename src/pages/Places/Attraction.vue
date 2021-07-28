@@ -44,7 +44,7 @@
                 hover
                 striped
                 small
-                id="club-list"
+                id="attraction-list"
                 :per-page="perPage"
                 :current-page="currentPage"
                 responsive
@@ -67,14 +67,14 @@
                   search == null
                     ? result.name
                     : result.filter((i) =>
-                        i.club_name
+                        i.name
                           .toLowerCase()
                           .trim()
                           .includes(search.toLowerCase().trim())
                       ).length
                 "
                 :per-page="perPage"
-                aria-controls="club-list"
+                aria-controls="attraction-list"
                 style="float:right"
               ></b-pagination>
             </div>
