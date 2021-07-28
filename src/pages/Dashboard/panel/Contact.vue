@@ -283,8 +283,8 @@ export default {
   },
   methods: {
     async fetch() {
-      let res = await api.get(this.apiRoute);
-      this.result = res.data;
+      // let res = await api.get(this.apiRoute);
+      // this.result = res.data;
     },
     async doneTask(id) {
       const data = {

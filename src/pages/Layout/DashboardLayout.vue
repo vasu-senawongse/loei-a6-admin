@@ -12,10 +12,10 @@
           <md-icon>dashboard</md-icon>
           <p>Dashboard</p>
         </sidebar-link>
-        <sidebar-link to="/users">
+        <!-- <sidebar-link to="/users">
           <md-icon>person</md-icon>
           <p>ผู้ดูแลระบบ</p>
-        </sidebar-link>
+        </sidebar-link> -->
         <sidebar-link to="/attractions">
           <i class="fas fa-map-marker-alt"></i>
           <p>แหล่งท่องเที่ยว</p>

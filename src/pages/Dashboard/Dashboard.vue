@@ -285,8 +285,8 @@ export default {
     };
   },
   async mounted() {
-    let res = await api.get(this.apiRoute);
-    this.result = res.data;
+    // let res = await api.get(this.apiRoute);
+    // this.result = res.data;
   },
 };
 </script>

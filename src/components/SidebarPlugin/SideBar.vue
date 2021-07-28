@@ -5,17 +5,6 @@
     :data-image="sidebarBackgroundImage"
     :style="sidebarStyle"
   >
-    <div class="logo">
-      <a href="#" class="simple-text logo-mini">
-        <div class="logo-img">
-          <img :src="imgLogo" alt="" />
-        </div>
-      </a>
-
-      <div class="simple-text logo-normal">
-        {{ title }}
-      </div>
-    </div>
     <div class="sidebar-wrapper">
       <slot name="content"></slot>
       <md-list class="nav">
@@ -41,12 +30,6 @@ export default {
     SidebarLink,
   },
   props: {
-    title: {
-      type: String,
-      default:
-        JSON.parse(localStorage.getItem('user')) &&
-        JSON.parse(localStorage.getItem('user')).displayName,
-    },
     sidebarBackgroundImage: {
       type: String,
       default: require('@/assets/img/sidebar-2.jpg'),

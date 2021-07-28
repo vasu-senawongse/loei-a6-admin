@@ -7,7 +7,7 @@ export default {
   },
   mounted() {
     localStorage.removeItem('user');
-    this.$router.push({ name: 'Login' });
+    window.location.href = 'http://43.229.149.124:8080';
   },
 };
 </script>

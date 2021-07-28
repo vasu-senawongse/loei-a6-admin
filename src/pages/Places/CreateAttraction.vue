@@ -5,9 +5,9 @@
         <template>
           <form>
             <md-card>
-              <md-card-header data-background-color="orange">
+              <md-card-header data-background-color="blue">
                 <h4 class="title">
-                  แก้ไขข้อมูลแหล่งท่องเที่ยว
+                  เพิ่มข้อมูลแหล่งท่องเที่ยว
                 </h4>
                 <!-- <p class="category">Complete your profile</p> -->
               </md-card-header>
@@ -107,7 +107,7 @@
                   class="mb-3"
                 />
 
-                <b-button variant="warning" @click="update"> บันทึก </b-button>
+                <b-button variant="info" @click="update"> บันทึก </b-button>
               </md-card-content>
             </md-card>
           </form>
@@ -137,8 +137,7 @@ export default {
       org: '',
       phone: '',
       id: this.$route.params.id,
-      apiRoute: `attractions/get-attraction-by-id/${this.$route.params.id}`,
-      editRoute: `attractions/update-attraction-by-id`,
+      apiRoute: `attractions/create-attraction`,
       result: {},
       options: [
         { text: '-- อำเภอ --', value: '', disabled: true },
@@ -234,10 +233,11 @@ export default {
         culture: this.culture,
         org: this.org,
         phone: this.phone,
+        createdAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       };
       this.$swal({
-        title: 'แก้ไขข้อมูล',
+        title: 'เพิ่มข้อมูล',
         text: this.name,
         showDenyButton: true,
         confirmButtonText: `ยืนยัน`,
@@ -246,10 +246,10 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           let resSubmit = api
-            .post(this.editRoute, model)
+            .post(this.apiRoute, model)
             .then((result) => {
               this.$swal({
-                title: 'แก้ไขข้อมูลแล้ว',
+                title: 'เพิ่มข้อมูลแล้ว',
                 icon: 'success',
                 confirmButtonText: 'ตกลง',
                 allowOutsideClick: false,
@@ -267,26 +267,9 @@ export default {
         }
       });
     },
-    async fetch() {
-      let res = await api.get(this.apiRoute);
-      this.result = res.data;
-      this.name = this.result.name;
-      this.district = this.result.district;
-      this.category = this.result.category;
-      this.physical = this.result.physical;
-      this.lat = this.result.lat;
-      this.lon = this.result.lon;
-      this.nature = this.result.nature;
-      this.history = this.result.history;
-      this.culture = this.result.culture;
-      this.org = this.result.org;
-      this.phone = this.result.phone;
-    },
   },
 
-  async mounted() {
-    this.fetch();
-  },
+  async mounted() {},
 };
 </script>
 <style lang="scss" scoped>

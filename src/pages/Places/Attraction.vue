@@ -4,6 +4,11 @@
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
+        <div style="float:right;margin-right:50px">
+          <a :href="'/attractions/create'">
+            <md-button class="md-raised md-info">เพิ่ม</md-button>
+          </a>
+        </div>
         <md-card>
           <md-card-header data-background-color="green">
             <div class="md-layout-item md-small-size-100 md-size-50">
