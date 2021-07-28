@@ -23,6 +23,18 @@
                   alternative
                   v-model="district"
                   :options="options"
+                  @change="subDistrict = ''"
+                  class="mb-3"
+                />
+
+                <b-select
+                  alternative
+                  v-model="subDistrict"
+                  :options="
+                    subOptions.filter(
+                      (i) => i.district == district || i.district == ''
+                    )
+                  "
                   class="mb-3"
                 />
 
@@ -127,6 +139,7 @@ export default {
       travelMonths: [],
       name: '',
       district: '',
+      subDistrict: '',
       category: '',
       physical: '',
       nature: '',
@@ -156,6 +169,104 @@ export default {
         'ภูหลวง',
         'วังสะพุง',
         'หนองหิน',
+      ],
+
+      subOptions: [
+        { text: '-- ตำบล --', value: '', disabled: true, district: '' },
+        { text: 'เชียงคาน', value: 'เชียงคาน', district: 'เชียงคาน' },
+        { text: 'ธาตุ', value: 'ธาตุ', district: 'เชียงคาน' },
+        { text: 'นาซ่าว', value: 'นาซ่าว', district: 'เชียงคาน' },
+        { text: 'เขาแก้ว', value: 'เขาแก้ว', district: 'เชียงคาน' },
+        { text: 'ปากตม', value: 'ปากตม', district: 'เชียงคาน' },
+        { text: 'บุฮม', value: 'บุฮม', district: 'เชียงคาน' },
+        { text: 'จอมศรี', value: 'จอมศรี', district: 'เชียงคาน' },
+        { text: 'หาดทรายขาว', value: 'หาดทรายขาว', district: 'เชียงคาน' },
+        { text: 'กุดป่อง', value: 'กุดป่อง', district: 'เมืองเลย' },
+        { text: 'เมือง', value: 'เมือง', district: 'เมืองเลย' },
+        { text: 'นาอ้อ', value: 'นาอ้อ', district: 'เมืองเลย' },
+        { text: 'กกดู่', value: 'กกดู่', district: 'เมืองเลย' },
+        { text: 'น้ำหมาน', value: 'น้ำหมาน', district: 'เมืองเลย' },
+        { text: 'เสี้ยว', value: 'เสี้ยว', district: 'เมืองเลย' },
+        { text: 'นาอาน', value: 'นาอาน', district: 'เมืองเลย' },
+        { text: 'นาโป่ง', value: 'นาโป่ง', district: 'เมืองเลย' },
+        { text: 'นาดินดำ', value: 'นาดินดำ', district: 'เมืองเลย' },
+        { text: 'น้ำสวย', value: 'น้ำสวย', district: 'เมืองเลย' },
+        { text: 'ชัยพฤกษ์', value: 'ชัยพฤกษ์', district: 'เมืองเลย' },
+        { text: 'นาแขม', value: 'นาแขม', district: 'เมืองเลย' },
+        { text: 'ศรีสองรัก', value: 'ศรีสองรัก', district: 'เมืองเลย' },
+        { text: 'กกทอง', value: 'กกทอง', district: 'เมืองเลย' },
+        { text: 'ผาอินทร์แปลง', value: 'ผาอินทร์แปลง', district: 'เอราวัณ' },
+        { text: 'เอราวัณ', value: 'เอราวัณ', district: 'เอราวัณ' },
+        { text: 'ผาสามยอด', value: 'ผาสามยอด', district: 'เอราวัณ' },
+        {
+          text: 'ทรัพย์ไพวัลย์',
+          value: 'ทรัพย์ไพวัลย์',
+          district: 'เอราวัณ',
+        },
+        { text: 'ด่านซ้าย', value: 'ด่านซ้าย', district: 'ด่านซ้าย' },
+        { text: 'ปากหมัน', value: 'ปากหมัน', district: 'ด่านซ้าย' },
+        { text: 'นาดี', value: 'นาดี', district: 'ด่านซ้าย' },
+        { text: 'โคกงาม', value: 'โคกงาม', district: 'ด่านซ้าย' },
+        { text: 'โพนสูง', value: 'โพนสูง', district: 'ด่านซ้าย' },
+        { text: 'อิปุ่ม', value: 'อิปุ่ม', district: 'ด่านซ้าย' },
+        { text: 'กกสะทอน', value: 'กกสะทอน', district: 'ด่านซ้าย' },
+        { text: 'โป่ง', value: 'โป่ง', district: 'ด่านซ้าย' },
+        { text: 'วังยาว', value: 'วังยาว', district: 'ด่านซ้าย' },
+        { text: 'นาหอ', value: 'นาหอ', district: 'ด่านซ้าย' },
+        { text: 'ท่าลี่', value: 'ท่าลี่', district: 'ท่าลี่' },
+        { text: 'หนองผือ', value: 'หนองผือ', district: 'ท่าลี่' },
+        { text: 'อาฮี', value: 'อาฮี', district: 'ท่าลี่' },
+        { text: 'น้ำแคม', value: 'น้ำแคม', district: 'ท่าลี่' },
+        { text: 'โคกใหญ่', value: 'โคกใหญ่', district: 'ท่าลี่' },
+        { text: 'น้ำทูน', value: 'น้ำทูน', district: 'ท่าลี่' },
+        { text: 'นาแห้ว', value: 'นาแห้ว', district: 'นาแห้ว' },
+        { text: 'แสงภา', value: 'แสงภา', district: 'นาแห้ว' },
+        { text: 'นาพึง', value: 'นาพึง', district: 'นาแห้ว' },
+        { text: 'นามาลา', value: 'นามาลา', district: 'นาแห้ว' },
+        { text: 'เหล่ากอหก', value: 'เหล่ากอหก', district: 'นาแห้ว' },
+        { text: 'นาด้วง', value: 'นาด้วง', district: 'นาด้วง' },
+        { text: 'นาดอกคำ', value: 'นาดอกคำ', district: 'นาด้วง' },
+        { text: 'ท่าสะอาด', value: 'ท่าสะอาด', district: 'นาด้วง' },
+        { text: 'ท่าสวรรค์', value: 'ท่าสวรรค์', district: 'นาด้วง' },
+        { text: 'ปากชม', value: 'ปากชม', district: 'ปากชม' },
+        { text: 'เชียงกลม', value: 'เชียงกลม', district: 'ปากชม' },
+        { text: 'หาดคัมภีร์', value: 'หาดคัมภีร์', district: 'ปากชม' },
+        { text: 'ห้วยบ่อซืน', value: 'ห้วยบ่อซืน', district: 'ปากชม' },
+        { text: 'ห้วยพิชัย', value: 'ห้วยพิชัย', district: 'ปากชม' },
+        { text: 'ชมเจริญ', value: 'ชมเจริญ', district: 'ปากชม' },
+        { text: 'ผาขาว', value: 'ผาขาว', district: 'ผาขาว' },
+        { text: 'ท่าช้างคล้อง', value: ' ท่าช้างคล้อง', district: 'ผาขาว' },
+        { text: 'โนนปอแดง', value: 'โนนปอแดง', district: 'ผาขาว' },
+        { text: 'โนนป่าซาง', value: 'โนนป่าซาง', district: 'ผาขาว' },
+        { text: 'บ้านเพิ่ม', value: 'บ้านเพิ่ม', district: 'ผาขาว' },
+        { text: 'หนองบัว', value: 'หนองบัว', district: 'ภูเรือ' },
+        { text: 'ท่าศาลา', value: 'ท่าศาลา', district: 'ภูเรือ' },
+        { text: 'ร่องจิก', value: 'ร่องจิก', district: 'ภูเรือ' },
+        { text: 'ปลาบ่า', value: 'ปลาบ่า', district: 'ภูเรือ' },
+        { text: 'ลาดค่าง', value: 'ลาดค่าง', district: 'ภูเรือ' },
+        { text: 'สานตม', value: 'สานตม', district: 'ภูเรือ' },
+        { text: 'ศรีฐาน', value: 'ศรีฐาน', district: 'ภูกระดึง' },
+        { text: 'ผานกเค้า', value: 'ผานกเค้า', district: 'ภูกระดึง' },
+        { text: 'ภูกระดึง', value: 'ภูกระดึง', district: 'ภูกระดึง' },
+        { text: 'ห้วยส้ม', value: 'ห้วยส้ม', district: 'ภูกระดึง' },
+        { text: 'ภูหอ', value: 'ภูหอ', district: 'ภูหลวง' },
+        { text: 'หนองคัน', value: 'หนองคัน', district: 'ภูหลวง' },
+        { text: 'ห้วยสีเสียด', value: 'ห้วยสีเสียด', district: 'ภูหลวง' },
+        { text: 'เลยวังไสย์', value: 'เลยวังไสย์', district: 'ภูหลวง' },
+        { text: 'แก่งศรีภูมิ', value: 'แก่งศรีภูมิ', district: 'ภูหลวง' },
+        { text: 'วังสะพุง', value: 'วังสะพุง', district: 'วังสะพุง' },
+        { text: 'ผาน้อย', value: 'ผาน้อย', district: 'วังสะพุง' },
+        { text: 'ทรายขาว', value: 'ทรายขาว', district: 'วังสะพุง' },
+        { text: 'ผาบิ้ง', value: 'ผาบิ้ง', district: 'วังสะพุง' },
+        { text: 'หนองหญ้าปล้อง', value: 'หนองหญ้าปล้อง', district: 'วังสะพุง' },
+        { text: 'เขาหลวง', value: 'เขาหลวง', district: 'วังสะพุง' },
+        { text: 'หนองงิ้ว', value: 'หนองงิ้ว', district: 'วังสะพุง' },
+        { text: 'โคกขมิ้น', value: 'โคกขมิ้น', district: 'วังสะพุง' },
+        { text: 'ปากปวน', value: 'ปากปวน', district: 'วังสะพุง' },
+        { text: 'ศรีสงคราม', value: 'ศรีสงคราม', district: 'วังสะพุง' },
+        { text: 'หนองหิน', value: 'หนองหิน', district: 'หนองหิน' },
+        { text: 'ตาดข่า', value: 'ตาดข่า', district: 'หนองหิน' },
+        { text: 'ปวนพุ', value: 'ปวนพุ', district: 'หนองหิน' },
       ],
 
       months: [
@@ -225,6 +336,7 @@ export default {
         id: this.id,
         name: this.name,
         district: this.district,
+        subDistrict: this.subDistrict,
         category: this.category,
         lat: this.lat,
         lon: this.lon,
@@ -272,6 +384,7 @@ export default {
       this.result = res.data;
       this.name = this.result.name;
       this.district = this.result.district;
+      this.subDistrict = this.result.subDistrict;
       this.category = this.result.category;
       this.physical = this.result.physical;
       this.lat = this.result.lat;
