@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  fifathailand-vuejs-admin:
+  loei-vuejs-admin:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: fifathailand-vuejs-admin
+    container_name: loei-vuejs-admin
     restart: unless-stopped
     volumes:
       - .:/app
@@ -16,4 +16,4 @@ services:
 networks:
   default:
     external:
-      name: fifathailand-net
+      name: default-net

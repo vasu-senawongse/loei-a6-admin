@@ -7,74 +7,107 @@
             <md-card>
               <md-card-header data-background-color="orange">
                 <h4 class="title">
-                  แก้ไขข้อมูลทีม
+                  แก้ไขข้อมูลแหล่งท่องเที่ยว
                 </h4>
                 <!-- <p class="category">Complete your profile</p> -->
               </md-card-header>
 
               <md-card-content>
-                <div style="width:400px">
-                  <img
-                    class="fit-image"
-                    :src="imgPath + 'clubs/' + id + '.png'"
-                  />
-                </div>
+                <b-input
+                  v-model="name"
+                  placeholder="ชื่อแหล่งท่องเที่ยว"
+                  class="mb-3"
+                />
 
-                <div class="md-layout md-gutter">
-                  <div class="md-layout-item md-small-size-100 md-size-50">
-                    <b-form-file
-                      :state="logo && logo.size < 1024 * 1024"
-                      accept="image/png"
-                      browse-text="อัพโหลดLogo"
-                      placeholder="Choose a file or drop it here..."
-                      drop-placeholder="Drop file here..."
-                      v-model="logo"
-                      class="mt-3"
-                    ></b-form-file>
-                  </div>
-                  <div class="md-layout-item md-small-size-100 md-size-50">
-                    <b-button variant="info" @click="uploadLogo()"
-                      >อัพโหลด</b-button
-                    >
-                  </div>
-                  <div class="md-layout-item md-small-size-100 md-size-50">
-                    <md-field>
-                      <label>ชื่อทีม</label>
-                      <md-input v-model="name" type="text"></md-input>
-                    </md-field>
-                  </div>
+                <b-select
+                  alternative
+                  v-model="district"
+                  :options="options"
+                  class="mb-3"
+                />
 
-                  <div class="md-layout-item md-small-size-100 md-size-50">
-                    <md-field>
-                      <label for="division">ดิวิชั่น</label>
-                      <md-select
-                        v-model="division"
-                        name="division"
-                        id="division"
-                      >
-                        <md-option value="1">1</md-option>
-                        <md-option value="2">2</md-option>
-                        <md-option value="3">3</md-option>
-                      </md-select>
-                    </md-field>
-                  </div>
+                <b-select
+                  alternative
+                  v-model="category"
+                  :options="types"
+                  class="mb-3"
+                />
 
-                  <div class="md-layout-item md-small-size-100 md-size-50">
-                    <label>ผู้จัดการทีม</label>
-                    <b-select :options="list" v-model="manager"></b-select>
-                  </div>
+                <b-input v-model="lat" placeholder="Latitude" class="mb-3" />
 
-                  <div class="md-layout-item md-size-100 text-right">
-                    <md-button
-                      @click="updateProfile()"
-                      class="
+                <b-input v-model="lon" placeholder="Lontitude" class="mb-3" />
 
-                          md-raised md-warning
-                      "
-                      >อัพเดตข้อมูล</md-button
-                    >
+                <quill-editor
+                  class="mb-3"
+                  ref="Physical"
+                  v-model="physical"
+                  :options="{
+                    modules: {
+                      toolbar: [['bold', 'italic', 'underline'], ['image']],
+                    },
+                    placeholder: 'ข้อมูลทางกายภาพ ...',
+                    theme: 'snow',
+                  }"
+                />
+
+                <quill-editor
+                  class="mb-3"
+                  ref="Nature"
+                  v-model="nature"
+                  :options="{
+                    modules: {
+                      toolbar: [['bold', 'italic', 'underline'], ['image']],
+                    },
+                    placeholder: 'ข้อมูลทางนิเวศ ...',
+                    theme: 'snow',
+                  }"
+                />
+
+                <quill-editor
+                  class="mb-3"
+                  ref="History"
+                  v-model="history"
+                  :options="{
+                    modules: {
+                      toolbar: [['bold', 'italic', 'underline'], ['image']],
+                    },
+                    placeholder: 'ข้อมูลทางประวัติศาสตร์ ...',
+                    theme: 'snow',
+                  }"
+                />
+
+                <quill-editor
+                  class="mb-3"
+                  ref="Culture"
+                  v-model="culture"
+                  :options="{
+                    modules: {
+                      toolbar: [['bold', 'italic', 'underline'], ['image']],
+                    },
+                    placeholder: 'ข้อมูลทางวัฒนธรรม ...',
+                    theme: 'snow',
+                  }"
+                />
+
+                <md-select v-model="travelMonths" class="mb-3" multiple>
+                  <div v-for="m in months" v-bind:key="m.value">
+                    <md-option :value="m.value">{{ m.text }}</md-option>
                   </div>
-                </div>
+                </md-select>
+
+                <b-input
+                  v-model="org"
+                  placeholder="ชื่อหน่วยงานที่รับผิดชอบ"
+                  class="mb-3"
+                />
+
+                <b-input
+                  v-model="phone"
+                  placeholder="เบอร์ติดต่อหน่วยงาน"
+                  class="mb-3"
+                />
+
+                <b-button variant="warning" @click="update"> แก้ไข </b-button>
               </md-card-content>
             </md-card>
           </form>
@@ -85,75 +118,145 @@
 </template>
 
 <script>
+import moment from 'moment';
 import api from '@/services/api.js';
 export default {
   components: {},
   data() {
     return {
+      travelMonths: [],
+      name: '',
+      district: '',
+      category: '',
+      physical: '',
+      nature: '',
+      history: '',
+      culture: '',
+      lat: '',
+      lon: '',
+      org: '',
+      phone: '',
       id: this.$route.params.id,
-      name: null,
-      logo: null,
-      manager: null,
-      division: null,
-      apiRoute: `clubs/get-club-by-id/`,
-      listRoute: 'users/get-player-list',
-      list: [{ text: '- เลือกผู้จัดการทีม -', value: null }],
+      apiRoute: `attractions/get-attraction-by-id/${this.$route.params.id}`,
+      editRoute: `attractions/update-attraction-by-id`,
       result: {},
-      logoRoute: '/upload',
-      path: 'public/images/clubs',
-      editRoute: 'admin/clubs/update-club-by-id',
-      imgPath:
-        process.env.VUE_APP_IMAGE_STORAGE_URL || 'http://localhost:5000/images',
+      options: [
+        { text: '-- อำเภอ --', value: '', disabled: true },
+        'เชียงคาน',
+        'เมืองเลย',
+        'เอราวัณ',
+        'ด่านซ้าย',
+        'ท่าลี่',
+        'นาแห้ว',
+        'นาด้วง',
+        'ปากชม',
+        'ผาขาว',
+        'ภูเรือ',
+        'ภูกระดึง',
+        'ภูหลวง',
+        'วังสะพุง',
+        'หนองหิน',
+      ],
+
+      months: [
+        {
+          value: 1,
+          text: 'มกราคม',
+        },
+        {
+          value: 2,
+          text: 'กุมภาพันธ์',
+        },
+        {
+          value: 3,
+          text: 'มีนาคม',
+        },
+        {
+          value: 4,
+          text: 'เมษายน',
+        },
+        {
+          value: 5,
+          text: 'พฤษภาคม',
+        },
+        {
+          value: 6,
+          text: 'มิถุนายน',
+        },
+        {
+          value: 7,
+          text: 'กรกฎาคม',
+        },
+        {
+          value: 8,
+          text: 'สิงหาคม',
+        },
+        {
+          value: 9,
+          text: 'กันยายน',
+        },
+        {
+          value: 10,
+          text: 'ตุลาคม',
+        },
+
+        {
+          value: 11,
+          text: 'พฤศจิกายน',
+        },
+        {
+          value: 12,
+          text: 'ธันวาคม',
+        },
+      ],
+
+      types: [
+        { text: '-- ประเภท --', value: '', disabled: true },
+        'ธรรมชาติ',
+        'ประวัติศาสตร์',
+        'วัฒนธรรม',
+        'วิทยาศาสตร์',
+      ],
     };
   },
   methods: {
-    async uploadLogo() {
-      let formData = new FormData();
-      formData.append('path', this.path);
-      formData.append('name', this.result._id + '.png');
-      formData.append('file', this.logo);
-      let res = await api
-        .post(this.logoRoute, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((resss) => {
-          location.reload();
-        })
-        .catch((err) => {
-          if (err.resss.status === 400);
-          this.$swal(err.resss.data, '', 'error');
-        });
-    },
-    updateProfile() {
-      const club = {
+    async update() {
+      var model = {
         id: this.id,
-        club_name: this.name,
-        club_manager: this.manager,
-        club_division: this.division,
+        name: this.name,
+        district: this.district,
+        category: this.category,
+        lat: this.lat,
+        lon: this.lon,
+        physical: this.physical,
+        nature: this.nature,
+        history: this.history,
+        culture: this.culture,
+        org: this.org,
+        phone: this.phone,
+        updatedAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       };
-
       this.$swal({
-        title: 'ยืนยันแก้ไขข้อมูลทีม',
-        text: this.result.club_name,
+        title: 'แก้ไขข้อมูล',
+        text: this.name,
         showDenyButton: true,
         confirmButtonText: `ยืนยัน`,
-        denyButtonText: `แก้ไข`,
+        denyButtonText: `ยกเลิก`,
         allowOutsideClick: false,
       }).then((result) => {
         if (result.isConfirmed) {
           let resSubmit = api
-            .post(this.editRoute, club)
+            .post(this.editRoute, model)
             .then((result) => {
               this.$swal({
-                title: 'อัพเดตข้อมูลทีมเรียบร้อย',
+                title: 'แก้ไขข้อมูลแล้ว',
                 icon: 'success',
                 confirmButtonText: 'ตกลง',
                 allowOutsideClick: false,
               }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                  this.$router.push({ name: 'Clubs' });
+                  this.fetch();
                 }
               });
             })
@@ -164,25 +267,25 @@ export default {
         }
       });
     },
+    async fetch() {
+      let res = await api.get(this.apiRoute);
+      this.result = res.data;
+      this.name = this.result.name;
+      this.district = this.result.district;
+      this.category = this.result.category;
+      this.physical = this.result.physical;
+      this.lat = this.result.lat;
+      this.lon = this.result.lon;
+      this.nature = this.result.nature;
+      this.history = this.result.history;
+      this.culture = this.result.culture;
+      this.org = this.result.org;
+      this.phone = this.result.phone;
+    },
   },
 
   async mounted() {
-    let res = await api.get(this.apiRoute + this.id);
-    this.result = res.data;
-    this.name = this.result.club_name;
-    this.manager = this.result.club_manager
-      ? this.result.club_manager._id
-      : null;
-    this.division = this.result.club_division;
-    let res2 = await api.get(this.listRoute);
-    var playerList = res2.data.filter(
-      (i) =>
-        i._id == (this.result.club_manager && this.result.club_manager._id) ||
-        !i.roles.includes('5fdcafb5b495f11654c1daed')
-    );
-    playerList.forEach((i) => {
-      this.list.push({ value: i._id, text: i.displayName });
-    });
+    this.fetch();
   },
 };
 </script>

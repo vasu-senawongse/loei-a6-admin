@@ -45,22 +45,13 @@
                 responsive
                 style="width: 100%"
               >
-                <template v-slot:cell(logo)="data">
-                  <div style="width:100px">
-                    <img
-                      :src="imgPath + 'clubs/' + data.item._id + '.png'"
-                      class="fit-image"
-                    />
-                  </div>
-                </template>
-
                 <template v-slot:cell(updatedAt)="data">
                   <span>{{
                     new Date(data.item.updatedAt).toLocaleString('en-GB')
                   }}</span>
                 </template>
                 <template v-slot:cell(btn)="data">
-                  <a :href="'/attractions/' + data.item._id">
+                  <a :href="'/attractions/' + data.item.id">
                     <md-button class="md-raised md-warning">แก้ไข</md-button>
                   </a>
                 </template>
@@ -104,18 +95,22 @@ export default {
         {
           key: 'name',
           label: 'แหล่งท่องเที่ยว',
+          sortable: true,
         },
         {
           key: 'district',
           label: 'อำเภอ',
+          sortable: true,
         },
         {
           key: 'category',
           label: 'ประเภท',
+          sortable: true,
         },
         {
           key: 'updatedAt',
           label: 'แก้ไขล่าสุดเมื่อ',
+          sortable: true,
         },
         {
           key: 'btn',
@@ -137,10 +132,4 @@ export default {
   },
 };
 </script>
-<style>
-.fit-image {
-  width: 10%;
-  object-fit: cover;
-  height: 50px; /* only if you want fixed height */
-}
-</style>
+<style></style>
