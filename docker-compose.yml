@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  fifathailand-vuejs-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fifathailand-vuejs-admin
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - ./docker/nginx:/etc/nginx/config.d
+    ports:
+      - '3000:3000'
+
+networks:
+  default:
+    external:
+      name: fifathailand-net
