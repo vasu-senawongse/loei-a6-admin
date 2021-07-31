@@ -19,6 +19,7 @@
                                     placeholder="Choose a file or drop it here..."
                                     drop-placeholder="Drop file here..."
                                     v-model="thumbnail"
+                                    accept="image/*"
                                     class="mb-3"
                                 ></b-form-file>
 

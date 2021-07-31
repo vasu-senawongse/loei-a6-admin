@@ -25,6 +25,7 @@
                                     :browse-text="
                                         img ? 'เปลี่ยนรูป' : 'เลือกรูป'
                                     "
+                                    accept="image/*"
                                     :placeholder="
                                         img
                                             ? img.split('/')[1]
