@@ -399,6 +399,8 @@ export default {
                 'วัฒนธรรม',
                 'วิทยาศาสตร์',
             ],
+            uploadRoute: '/upload',
+            path: 'public/images/attractions',
             imgPath:
                 process.env.VUE_APP_IMAGE_STORAGE_URL ||
                 'http://localhost:5000/images',
@@ -428,6 +430,7 @@ export default {
             if (this.thumbnail) {
                 await this.upload()
             }
+
             var model = {
                 id: this.id,
                 img: this.img,
