@@ -484,7 +484,7 @@ export default {
                     },
                 })
                 .then(resss => {
-                    this.img = 'attractions/' + this.thumbnail.name
+                    this.img = `attractions/${this.id}/${this.thumbnail.name}`
                 })
                 .catch(err => {
                     if (err.resss.status === 400);
