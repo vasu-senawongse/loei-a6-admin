@@ -459,7 +459,7 @@ export default {
     methods: {
         async upload() {
             let formData = new FormData()
-            formData.append('path', this.path)
+            formData.append('path', `${this.path}/${id}`)
             formData.append('name', this.thumbnail.name)
             formData.append('file', this.thumbnail)
             let res = await api
