@@ -133,11 +133,73 @@
                                     }"
                                 />
 
-                                <!-- <md-select v-model="travelMonths" class="mb-3" multiple>
-                  <div v-for="m in months" v-bind:key="m.value">
-                    <md-option :value="m.value">{{ m.text }}</md-option>
-                  </div>
-                </md-select> -->
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="attraction"
+                                    v-model="attraction"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder: 'สิ่งดึงดูดใจ ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="accessibility"
+                                    v-model="accessibility"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder:
+                                            'การเดินทางมายังแหล่งท่องเที่ยว ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="accommodation"
+                                    v-model="accommodation"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder: 'การบริการที่พัก ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+                                <md-field>
+                                    <label for="months">เดือนท่องเที่ยว</label>
+                                    <md-select
+                                        v-model="travelMonths"
+                                        class="mb-3"
+                                        multiple
+                                        name="months"
+                                        id="months"
+                                    >
+                                        <div
+                                            v-for="m in months"
+                                            v-bind:key="m.value"
+                                        >
+                                            <md-option :value="m.value">{{
+                                                m.text
+                                            }}</md-option>
+                                        </div>
+                                    </md-select>
+                                </md-field>
 
                                 <b-input
                                     v-model="org"
@@ -184,6 +246,9 @@ export default {
             lon: '',
             org: '',
             phone: '',
+            attraction: '',
+            accessibility: '',
+            accommodation: '',
             thumbnail: null,
             id: this.$route.params.id,
             apiRoute: `attractions/create-attraction`,
@@ -428,6 +493,10 @@ export default {
                 nature: this.nature,
                 history: this.history,
                 culture: this.culture,
+                attraction: this.attraction,
+                accessibility: this.accessibility,
+                accommodation: this.accommodation,
+                month: this.travelMonths.join(),
                 org: this.org,
                 phone: this.phone,
                 createdAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
