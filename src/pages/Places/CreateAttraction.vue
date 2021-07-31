@@ -21,7 +21,6 @@
                                     v-model="thumbnail"
                                     accept="image/*"
                                     class="mb-3"
-                                    multiple
                                 ></b-form-file>
 
                                 <b-input

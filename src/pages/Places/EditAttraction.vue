@@ -22,14 +22,17 @@
                                 </div>
 
                                 <b-form-file
-                                    :browse-text="'เลือกรูป'"
+                                    :browse-text="
+                                        img ? 'เปลี่ยนรูป' : 'เลือกรูป'
+                                    "
                                     accept="image/*"
                                     :placeholder="
-                                        'Choose a file or drop it here...'
+                                        img
+                                            ? img.split('/')[1]
+                                            : 'Choose a file or drop it here...'
                                     "
                                     v-model="thumbnail"
                                     class="mb-3"
-                                    multiple
                                 ></b-form-file>
                                 <b-input
                                     v-model="name"
