@@ -187,6 +187,50 @@
                                     }"
                                 />
                                 <md-field>
+                                    <label for="activities"
+                                        >กิจกรรมการท่องเที่ยว</label
+                                    >
+                                    <md-select
+                                        v-model="activities"
+                                        class="mb-3"
+                                        multiple
+                                        name="activities"
+                                        id="activities"
+                                    >
+                                        <div
+                                            v-for="m in actList"
+                                            v-bind:key="'act-' + m.value"
+                                        >
+                                            <md-option :value="m.value">{{
+                                                m.text
+                                            }}</md-option>
+                                        </div>
+                                    </md-select>
+                                </md-field>
+
+                                <md-field>
+                                    <label for="amenities"
+                                        >สิ่งอำนวยความสะดวก</label
+                                    >
+                                    <md-select
+                                        v-model="amenities"
+                                        class="mb-3"
+                                        multiple
+                                        name="amenities"
+                                        id="amenities"
+                                    >
+                                        <div
+                                            v-for="m in amenList"
+                                            v-bind:key="'amen-' + m.value"
+                                        >
+                                            <md-option :value="m.value">{{
+                                                m.text
+                                            }}</md-option>
+                                        </div>
+                                    </md-select>
+                                </md-field>
+
+                                <md-field>
                                     <label for="months">เดือนท่องเที่ยว</label>
                                     <md-select
                                         v-model="travelMonths"
@@ -342,6 +386,8 @@ export default {
             attraction: '',
             accessibility: '',
             accommodation: '',
+            activities: [],
+            amenities: [],
             id: this.$route.params.id,
             apiRoute: `attractions/get-attraction-by-id/${this.$route.params.id}`,
             editRoute: `attractions/update-attraction-by-id`,
@@ -564,10 +610,14 @@ export default {
                 { text: 'ทางศิลปวิทยาการ', value: 'ทางศิลปวิทยาการ' },
                 { text: 'จุดหมายตา', value: 'จุดหมายตา' },
             ],
+            actList: [],
+            amenList: [],
             uploadRoute: '/upload',
             insertRoute: `attractions/insert-attraction-image`,
             deleteRoute: `attractions/delete-attraction-image`,
             selectRoute: `attractions/select-attraction-thumbnail`,
+            amenRoute: `amenities/get-amenities`,
+            actRoute: `activities/get-activities`,
             path: 'public/images/attractions',
             imgPath:
                 process.env.VUE_APP_IMAGE_STORAGE_URL ||
@@ -664,6 +714,8 @@ export default {
                 attraction: this.attraction,
                 accessibility: this.accessibility,
                 accommodation: this.accommodation,
+                activities: this.activities.join(),
+                amenities: this.amenities.join(),
                 month: this.travelMonths.join(),
                 org: this.org,
                 phone: this.phone,
@@ -705,14 +757,30 @@ export default {
             let res2 = await api.get(this.imgRoute)
             this.gallery = res2.data
         },
+
+        async fetchAct() {
+            let res = await api.get(this.actRoute)
+            res.data.forEach(i => {
+                this.actList.push({ text: i.name, value: i.name })
+            })
+        },
+
+        async fetchAmen() {
+            let res = await api.get(this.amenRoute)
+            res.data.forEach(i => {
+                this.amenList.push({ text: i.name, value: i.name })
+            })
+        },
         async fetch() {
             let res = await api.get(this.apiRoute)
             this.result = res.data
+
             this.name = this.result.name
             this.img = this.result.img
             this.district = this.result.district
             this.subDistrict = this.result.subDistrict
-            this.category = this.result.category.split(',')
+            this.category =
+                this.result.category && this.result.category.split(',')
             this.physical = this.result.physical
             this.lat = this.result.lat
             this.lon = this.result.lon
@@ -722,22 +790,32 @@ export default {
             this.attraction = this.result.attraction
             this.accessibility = this.result.accessibility
             this.accommodation = this.result.accommodation
-            this.travelMonths = this.result.month.split(',')
+            this.amenities =
+                this.result.amenities && this.result.amenities.split(',')
+            this.activities =
+                this.result.activities && this.result.activities.split(',')
+            this.travelMonths =
+                this.result.month && this.result.month.split(',')
             this.org = this.result.org
             this.phone = this.result.phone
-            this.fetchImg()
         },
     },
 
     async mounted() {
         this.fetch()
+        this.fetchImg()
+        this.fetchAmen()
+        this.fetchAct()
     },
 }
 </script>
-<style lang="scss" scoped>
+<style type="text/css">
 .fit-image {
     width: 100%;
     object-fit: cover;
     height: auto; /* only if you want fixed height */
+}
+.md-menu-content {
+    max-width: 500px !important;
 }
 </style>

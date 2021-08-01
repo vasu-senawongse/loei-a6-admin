@@ -195,6 +195,50 @@
                                         theme: 'snow',
                                     }"
                                 />
+
+                                <md-field>
+                                    <label for="activities"
+                                        >กิจกรรมการท่องเที่ยว</label
+                                    >
+                                    <md-select
+                                        v-model="activities"
+                                        class="mb-3"
+                                        multiple
+                                        name="activities"
+                                        id="activities"
+                                    >
+                                        <div
+                                            v-for="m in actList"
+                                            v-bind:key="'act-' + m.value"
+                                        >
+                                            <md-option :value="m.value">{{
+                                                m.text
+                                            }}</md-option>
+                                        </div>
+                                    </md-select>
+                                </md-field>
+
+                                <md-field>
+                                    <label for="amenities"
+                                        >สิ่งอำนวยความสะดวก</label
+                                    >
+                                    <md-select
+                                        v-model="amenities"
+                                        class="mb-3"
+                                        multiple
+                                        name="amenities"
+                                        id="amenities"
+                                    >
+                                        <div
+                                            v-for="m in amenList"
+                                            v-bind:key="m.value"
+                                        >
+                                            <md-option :value="m.value">{{
+                                                m.text
+                                            }}</md-option>
+                                        </div>
+                                    </md-select>
+                                </md-field>
                                 <md-field>
                                     <label for="months">เดือนท่องเที่ยว</label>
                                     <md-select
@@ -263,6 +307,8 @@ export default {
             attraction: '',
             accessibility: '',
             accommodation: '',
+            activities: [],
+            amenities: [],
             thumbnail: null,
             id: 0,
             apiRoute: `attractions/create-attraction`,
@@ -462,7 +508,7 @@ export default {
 
             uploadRoute: '/upload',
             path: 'public/images/attractions',
-
+            actRoute: `activities/get-activities`,
             types: [
                 { text: 'เชิงนิเวศ', value: 'เชิงนิเวศ' },
                 { text: 'ทางธรรมชาติ', value: 'ทางธรรมชาติ' },
@@ -475,6 +521,9 @@ export default {
                 { text: 'ทางศิลปวิทยาการ', value: 'ทางศิลปวิทยาการ' },
                 { text: 'จุดหมายตา', value: 'จุดหมายตา' },
             ],
+            actList: [],
+            amenList: [],
+            amenRoute: `amenities/get-amenities`,
         }
     },
     methods: {
@@ -517,6 +566,8 @@ export default {
                 attraction: this.attraction,
                 accessibility: this.accessibility,
                 accommodation: this.accommodation,
+                activities: this.activities.join(),
+                amenities: this.amenities.join(),
                 month: this.travelMonths.join(),
                 org: this.org,
                 phone: this.phone,
@@ -556,11 +607,27 @@ export default {
                 }
             })
         },
+
+        async fetchAmen() {
+            let res = await api.get(this.amenRoute)
+            res.data.forEach(i => {
+                this.amenList.push({ text: i.name, value: i.name })
+            })
+        },
+
+        async fetchAct() {
+            let res = await api.get(this.actRoute)
+            res.data.forEach(i => {
+                this.actList.push({ text: i.name, value: i.name })
+            })
+        },
     },
 
     async mounted() {
         let res = await api.get(this.idRoute)
         this.id = res.data
+        this.fetchAmen()
+        this.fetchAct()
     },
 }
 </script>
@@ -569,5 +636,8 @@ export default {
     width: 100%;
     object-fit: cover;
     height: auto; /* only if you want fixed height */
+}
+.md-menu-content {
+    max-width: 500px !important;
 }
 </style>
