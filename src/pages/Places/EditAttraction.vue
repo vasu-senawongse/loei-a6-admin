@@ -28,7 +28,7 @@
                                     accept="image/*"
                                     :placeholder="
                                         img
-                                            ? img.split('/')[1]
+                                            ? img.split('/')[2]
                                             : 'Choose a file or drop it here...'
                                     "
                                     v-model="thumbnail"
@@ -469,6 +469,9 @@ export default {
             imgPath:
                 process.env.VUE_APP_IMAGE_STORAGE_URL ||
                 'http://localhost:5000/images',
+
+            imgRoute: `attractions/get-attraction-gallery-by-id/${this.$route.params.id}`,
+            gallery: [],
         }
     },
     methods: {
@@ -568,6 +571,10 @@ export default {
             this.travelMonths = this.result.month.split(',')
             this.org = this.result.org
             this.phone = this.result.phone
+
+            let res2 = await api.get(this.imgRoute)
+            this.gallery = res2.data
+            console.log(this.gallery)
         },
     },
 
