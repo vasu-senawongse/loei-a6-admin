@@ -49,13 +49,27 @@
                                     class="mb-3"
                                 />
 
-                                <b-select
-                                    alternative
-                                    v-model="category"
-                                    :options="types"
-                                    class="mb-3"
-                                />
-
+                                <md-field>
+                                    <label for="category"
+                                        >ประเภทแหล่งท่องเที่ยว</label
+                                    >
+                                    <md-select
+                                        v-model="category"
+                                        class="mb-3"
+                                        multiple
+                                        name="category"
+                                        id="category"
+                                    >
+                                        <div
+                                            v-for="m in types"
+                                            v-bind:key="m.value"
+                                        >
+                                            <md-option :value="m.value">{{
+                                                m.text
+                                            }}</md-option>
+                                        </div>
+                                    </md-select>
+                                </md-field>
                                 <b-input
                                     v-model="lat"
                                     placeholder="Latitude"
@@ -236,7 +250,7 @@ export default {
             name: '',
             district: '',
             subDistrict: '',
-            category: '',
+            category: [],
             physical: '',
             nature: '',
             history: '',
@@ -450,17 +464,16 @@ export default {
             path: 'public/images/attractions',
 
             types: [
-                { text: '-- ประเภท --', value: '', disabled: true },
-                'เชิงนิเวศ',
-                'ทางธรรมชาติ',
-                'ทางประวัติศาสตร์',
-                'ทางวัฒนธรรม',
-                'โดยชุมชน',
-                'เชิงเกษตร',
-                'เพื่อนันทนาการ',
-                'เชิงสุขภาพ',
-                'ทางศิลปวิทยาการ',
-                'จุดหมายตา',
+                { text: 'เชิงนิเวศ', value: 'เชิงนิเวศ' },
+                { text: 'ทางธรรมชาติ', value: 'ทางธรรมชาติ' },
+                { text: 'ทางประวัติศาสตร์', value: 'ทางประวัติศาสตร์' },
+                { text: 'ทางวัฒนธรรม', value: 'ทางวัฒนธรรม' },
+                { text: 'โดยชุมชน', value: 'โดยชุมชน' },
+                { text: 'เชิงเกษตร', value: 'เชิงเกษตร' },
+                { text: 'เพื่อนันทนาการ', value: 'เพื่อนันทนาการ' },
+                { text: 'เชิงสุขภาพ', value: 'เชิงสุขภาพ' },
+                { text: 'ทางศิลปวิทยาการ', value: 'ทางศิลปวิทยาการ' },
+                { text: 'จุดหมายตา', value: 'จุดหมายตา' },
             ],
         }
     },
@@ -494,7 +507,7 @@ export default {
                 name: this.name,
                 district: this.district,
                 subDistrict: this.subDistrict,
-                category: this.category,
+                category: this.category.join(),
                 lat: this.lat,
                 lon: this.lon,
                 physical: this.physical,
