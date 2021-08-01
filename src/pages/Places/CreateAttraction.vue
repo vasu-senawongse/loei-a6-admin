@@ -13,7 +13,6 @@
                             </md-card-header>
 
                             <md-card-content>
-                                <img :src="imgPath + img" v-if="img != ''" />
                                 <b-form-file
                                     browse-text="เลือกรูป"
                                     placeholder="Choose a file or drop it here..."
@@ -251,8 +250,9 @@ export default {
             accessibility: '',
             accommodation: '',
             thumbnail: null,
-            id: this.$route.params.id,
+            id: 0,
             apiRoute: `attractions/create-attraction`,
+            idRoute: `attractions/get-attraction-next-id`,
             result: {},
             options: [
                 { text: '-- อำเภอ --', value: '', disabled: true },
@@ -460,7 +460,7 @@ export default {
     methods: {
         async upload() {
             let formData = new FormData()
-            formData.append('path', `${this.path}/${id}`)
+            formData.append('path', `${this.path}/${this.id}`)
             formData.append('name', this.thumbnail.name)
             formData.append('file', this.thumbnail)
             let res = await api
@@ -523,7 +523,9 @@ export default {
                             }).then(result => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
-                                    this.fetch()
+                                    this.$router.push({
+                                        path: `/attractions/${this.id}`,
+                                    })
                                 }
                             })
                         })
@@ -536,7 +538,10 @@ export default {
         },
     },
 
-    async mounted() {},
+    async mounted() {
+        let res = await api.get(this.idRoute)
+        this.id = res.data
+    },
 }
 </script>
 <style lang="scss" scoped>

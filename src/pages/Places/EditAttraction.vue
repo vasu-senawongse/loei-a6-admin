@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="md-layout">
-            <div class="md-layout-item md-medium-size-100 md-size-66">
+            <div class="md-layout-item md-medium-size-100 md-size-50">
                 <template>
                     <form>
                         <md-card>
@@ -9,31 +9,9 @@
                                 <h4 class="title">
                                     แก้ไขข้อมูลแหล่งท่องเที่ยว
                                 </h4>
-                                <!-- <p class="category">Complete your profile</p> -->
                             </md-card-header>
 
                             <md-card-content>
-                                <div style="width: 500px">
-                                    <img
-                                        :src="imgPath + img"
-                                        v-if="img != ''"
-                                        class="mb-3 fit-image"
-                                    />
-                                </div>
-
-                                <b-form-file
-                                    :browse-text="
-                                        img ? 'เปลี่ยนรูป' : 'เลือกรูป'
-                                    "
-                                    accept="image/*"
-                                    :placeholder="
-                                        img
-                                            ? img.split('/')[2]
-                                            : 'Choose a file or drop it here...'
-                                    "
-                                    v-model="thumbnail"
-                                    class="mb-3"
-                                ></b-form-file>
                                 <b-input
                                     v-model="name"
                                     placeholder="ชื่อแหล่งท่องเที่ยว"
@@ -232,6 +210,92 @@
                     </form>
                 </template>
             </div>
+            <div class="md-layout-item md-medium-size-100 md-size-50">
+                <template>
+                    <form>
+                        <md-card>
+                            <md-card-header data-background-color="orange">
+                                <h4 class="title">
+                                    แกลอรี่รูปภาพ
+                                </h4>
+                            </md-card-header>
+
+                            <md-card-content>
+                                <b-form-file
+                                    :browse-text="'เลือกรูป'"
+                                    accept="image/*"
+                                    placeholder="
+
+                                            'Choose a file or drop it here...'
+                                    "
+                                    v-model="thumbnail"
+                                    class="mb-3 mr-1"
+                                    style="width:75%"
+                                ></b-form-file>
+                                <b-button
+                                    variant="info"
+                                    @click="upload"
+                                    :disabled="thumbnail == null"
+                                >
+                                    อัพโหลด
+                                </b-button>
+
+                                <b-table
+                                    :items="gallery"
+                                    :fields="fields"
+                                    id="image-list"
+                                    :per-page="perPage"
+                                    :current-page="currentPage"
+                                    hover
+                                    striped
+                                    small
+                                    responsive
+                                    sort-icon-left
+                                    style="width: 100%"
+                                >
+                                    <template v-slot:cell(img)="data">
+                                        <div style="width: 180px">
+                                            <img
+                                                :src="imgPath + data.item.img"
+                                                class="mb-3 fit-image"
+                                            />
+                                        </div>
+                                    </template>
+
+                                    <template v-slot:cell(btn)="data">
+                                        <b-button
+                                            class="m-1"
+                                            variant="warning"
+                                            :disabled="data.item.img == img"
+                                            @click="
+                                                selectThumbnail(data.item.img)
+                                            "
+                                        >
+                                            ตั้งเป็นรูปปก
+                                        </b-button>
+
+                                        <b-button
+                                            class="m-1"
+                                            variant="danger"
+                                            :disabled="data.item.img == img"
+                                            @click="deleteImage(data.item)"
+                                        >
+                                            ลบ
+                                        </b-button>
+                                    </template>
+                                </b-table>
+                                <b-pagination
+                                    v-model="currentPage"
+                                    :total-rows="gallery.length"
+                                    :per-page="perPage"
+                                    aria-controls="image-list"
+                                    style="float:right"
+                                ></b-pagination>
+                            </md-card-content>
+                        </md-card>
+                    </form>
+                </template>
+            </div>
         </div>
     </div>
 </template>
@@ -243,6 +307,8 @@ export default {
     components: {},
     data() {
         return {
+            currentPage: 1,
+            perPage: 10,
             travelMonths: [],
             name: '',
             district: '',
@@ -456,7 +522,21 @@ export default {
                     text: 'ธันวาคม',
                 },
             ],
-
+            fields: [
+                {
+                    key: 'img',
+                    label: 'รูปภาพ',
+                },
+                {
+                    key: 'img_order',
+                    label: 'ลำดับภาพ',
+                    sortable: true,
+                },
+                {
+                    key: 'btn',
+                    label: '',
+                },
+            ],
             types: [
                 { text: '-- ประเภท --', value: '', disabled: true },
                 'ธรรมชาติ',
@@ -465,6 +545,9 @@ export default {
                 'วิทยาศาสตร์',
             ],
             uploadRoute: '/upload',
+            insertRoute: `attractions/insert-attraction-image`,
+            deleteRoute: `attractions/delete-attraction-image`,
+            selectRoute: `attractions/select-attraction-thumbnail`,
             path: 'public/images/attractions',
             imgPath:
                 process.env.VUE_APP_IMAGE_STORAGE_URL ||
@@ -475,7 +558,24 @@ export default {
         }
     },
     methods: {
+        async selectThumbnail(img) {
+            var model = {
+                img: img,
+                id: this.id,
+            }
+            await api.post(this.selectRoute, model)
+            let res = await api.get(this.apiRoute)
+            this.result = res.data
+            this.img = this.result.img
+        },
+
         async upload() {
+            var model = {
+                img: `attractions/${this.id}/${this.thumbnail.name}`,
+                attraction: this.id,
+                order: this.gallery[this.gallery.length - 1].img_order + 1,
+            }
+            await api.post(this.insertRoute, model)
             let formData = new FormData()
             formData.append('path', `${this.path}/${this.id}`)
             formData.append('name', this.thumbnail.name)
@@ -487,21 +587,50 @@ export default {
                     },
                 })
                 .then(resss => {
-                    this.img = `attractions/${this.id}/${this.thumbnail.name}`
+                    this.thumbnail = null
+                    this.fetchImg()
                 })
                 .catch(err => {
                     if (err.resss.status === 400);
                     this.$swal(err.resss.data, '', 'error')
                 })
         },
-        async update() {
-            if (this.thumbnail) {
-                await this.upload()
-            }
 
+        async deleteImage(img) {
+            this.$swal({
+                title: 'ยืนยันลบรูป',
+                showDenyButton: true,
+                confirmButtonText: `ยืนยัน`,
+                denyButtonText: `ยกเลิก`,
+                allowOutsideClick: false,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let resSubmit = api
+                        .delete(this.deleteRoute, img)
+                        .then(result => {
+                            this.$swal({
+                                title: 'ลบรูปแล้ว',
+                                icon: 'success',
+                                confirmButtonText: 'ตกลง',
+                                allowOutsideClick: false,
+                            }).then(result => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    this.fetchImg()
+                                }
+                            })
+                        })
+                        .catch(err => {
+                            if (err.response.status === 400);
+                            this.$swal(err.response.data, '', 'error')
+                        })
+                }
+            })
+        },
+
+        async update() {
             var model = {
                 id: this.id,
-                img: this.img,
                 name: this.name,
                 district: this.district,
                 subDistrict: this.subDistrict,
@@ -551,6 +680,11 @@ export default {
                 }
             })
         },
+
+        async fetchImg() {
+            let res2 = await api.get(this.imgRoute)
+            this.gallery = res2.data
+        },
         async fetch() {
             let res = await api.get(this.apiRoute)
             this.result = res.data
@@ -571,10 +705,7 @@ export default {
             this.travelMonths = this.result.month.split(',')
             this.org = this.result.org
             this.phone = this.result.phone
-
-            let res2 = await api.get(this.imgRoute)
-            this.gallery = res2.data
-            console.log(this.gallery)
+            this.fetchImg()
         },
     },
 
