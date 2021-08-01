@@ -396,55 +396,56 @@ export default {
 
             months: [
                 {
-                    value: 1,
+                    value: '1',
                     text: 'มกราคม',
                 },
                 {
-                    value: 2,
+                    value: '2',
                     text: 'กุมภาพันธ์',
                 },
                 {
-                    value: 3,
+                    value: '3',
                     text: 'มีนาคม',
                 },
                 {
-                    value: 4,
+                    value: '4',
                     text: 'เมษายน',
                 },
                 {
-                    value: 5,
+                    value: '5',
                     text: 'พฤษภาคม',
                 },
                 {
-                    value: 6,
+                    value: '6',
                     text: 'มิถุนายน',
                 },
                 {
-                    value: 7,
+                    value: '7',
                     text: 'กรกฎาคม',
                 },
                 {
-                    value: 8,
+                    value: '8',
                     text: 'สิงหาคม',
                 },
                 {
-                    value: 9,
+                    value: '9',
                     text: 'กันยายน',
                 },
                 {
-                    value: 10,
+                    value: '10',
                     text: 'ตุลาคม',
                 },
 
                 {
-                    value: 11,
+                    value: '11',
                     text: 'พฤศจิกายน',
                 },
                 {
-                    value: 12,
+                    value: '12',
                     text: 'ธันวาคม',
                 },
             ],
+
             uploadRoute: '/upload',
             path: 'public/images/attractions',
 
