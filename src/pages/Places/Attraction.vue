@@ -73,10 +73,16 @@
                                 </template>
                                 <template v-slot:cell(btn)="data">
                                     <a :href="'/attractions/' + data.item.id">
-                                        <md-button class="md-raised md-warning"
+                                        <md-button
+                                            class="md-raised md-warning mr-2"
                                             >แก้ไข</md-button
                                         >
                                     </a>
+                                    <md-button
+                                        class="md-raised md-danger mr-2"
+                                        @click="deleteAttraction(data.item)"
+                                        >ลบ</md-button
+                                    >
                                 </template>
                             </b-table>
                             <b-pagination
@@ -116,6 +122,7 @@ export default {
             currentPage: 1,
             perPage: 10,
             apiRoute: `attractions/get-attractions`,
+            deleteRoute: `attractions/delete-attraction`,
             result: [],
             search: null,
             fields: [
@@ -149,6 +156,43 @@ export default {
         }
     },
     methods: {
+        async deleteAttraction(attraction) {
+            const model = {
+                id: attraction.id,
+            }
+
+            this.$swal({
+                title: 'ยืนยันลบแหล่งที่อยู่',
+                text: attraction.name,
+                showDenyButton: true,
+                confirmButtonText: `ยืนยัน`,
+                denyButtonText: `ยกเลิก`,
+                allowOutsideClick: false,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let resSubmit = api
+                        .delete(this.deleteRoute, model)
+                        .then(result => {
+                            this.$swal({
+                                title: 'ลบแหล่งท่องเที่ยวแล้ว',
+                                icon: 'success',
+                                confirmButtonText: 'ตกลง',
+                                allowOutsideClick: false,
+                            }).then(result => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    this.fetch()
+                                }
+                            })
+                        })
+                        .catch(err => {
+                            if (err.response.status === 400);
+                            this.$swal(err.response.data, '', 'error')
+                        })
+                }
+            })
+        },
+
         async fetch() {
             let res = await api.get(this.apiRoute)
             this.result = res.data

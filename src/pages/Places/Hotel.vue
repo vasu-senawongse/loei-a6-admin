@@ -67,10 +67,16 @@
                                 </template>
                                 <template v-slot:cell(btn)="data">
                                     <a :href="'/hotels/' + data.item.id">
-                                        <md-button class="md-raised md-warning"
+                                        <md-button
+                                            class="md-raised md-warning mr-2"
                                             >แก้ไข</md-button
                                         >
                                     </a>
+                                    <md-button
+                                        class="md-raised md-danger mr-2"
+                                        @click="deleteHotel(data.item)"
+                                        >ลบ</md-button
+                                    >
                                 </template>
                             </b-table>
                             <b-pagination
@@ -110,6 +116,7 @@ export default {
             currentPage: 1,
             perPage: 10,
             apiRoute: `hotels/get-hotels`,
+            deleteRoute: `hotels/delete-hotel`,
             result: [],
             search: null,
             fields: [
@@ -145,6 +152,42 @@ export default {
         }
     },
     methods: {
+        async deleteHotel(hotel) {
+            const model = {
+                id: hotel.id,
+            }
+            this.$swal({
+                title: 'ยืนยันลบที่พัก',
+                text: hotel.name,
+                showDenyButton: true,
+                confirmButtonText: `ยืนยัน`,
+                denyButtonText: `ยกเลิก`,
+                allowOutsideClick: false,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let resSubmit = api
+                        .delete(this.deleteRoute, model)
+                        .then(result => {
+                            this.$swal({
+                                title: 'ลบที่พักแล้ว',
+                                icon: 'success',
+                                confirmButtonText: 'ตกลง',
+                                allowOutsideClick: false,
+                            }).then(result => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    this.fetch()
+                                }
+                            })
+                        })
+                        .catch(err => {
+                            if (err.response.status === 400);
+                            this.$swal(err.response.data, '', 'error')
+                        })
+                }
+            })
+        },
+
         async fetch() {
             let res = await api.get(this.apiRoute)
             this.result = res.data
