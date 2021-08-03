@@ -3,7 +3,7 @@
         <div class="md-layout">
             <div class="md-layout-item md-medium-size-100 md-size-66">
                 <template>
-                    <form>
+                    <form @submit.prevent="create()">
                         <md-card>
                             <md-card-header data-background-color="blue">
                                 <h4 class="title">
@@ -271,7 +271,7 @@
                                     class="mb-3"
                                 />
 
-                                <b-button variant="info" @click="create">
+                                <b-button variant="info" type="submit">
                                     บันทึก
                                 </b-button>
                             </md-card-content>
