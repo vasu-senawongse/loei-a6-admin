@@ -617,7 +617,7 @@ export default {
         this.id = res.data
         let res2 = await api.get('attractions/get-attraction-types')
         res2.data.forEach(i => {
-            this.types.push(i.name)
+            this.types.push({ text: i.name, value: i.name })
         })
         this.fetchAmen()
         this.fetchAct()
