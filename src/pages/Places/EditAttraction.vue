@@ -73,6 +73,12 @@
                                     class="mb-3"
                                 />
 
+                                <b-input
+                                    v-model="register"
+                                    placeholder="การขึ้นทะเบียน/ประกาศ"
+                                    class="mb-3"
+                                />
+
                                 <quill-editor
                                     class="mb-3"
                                     ref="Physical"
@@ -100,7 +106,74 @@
                                                 ['image'],
                                             ],
                                         },
-                                        placeholder: 'ข้อมูลทางนิเวศ ...',
+                                        placeholder:
+                                            'ข้อมูลคุณค่าทางธรรมชาติ ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="Geo"
+                                    v-model="geo"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder:
+                                            'ข้อมูลทางธรณีวิทยาและซากดึกดำบรรพ์ ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="Eco"
+                                    v-model="eco"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder: 'ข้อมูลทางนิเวศวิทยา ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="Eco"
+                                    v-model="eco"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder: 'ข้อมูลทางนิเวศวิทยา ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="Biodiversity"
+                                    v-model="biodiversity"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder:
+                                            'ข้อมูลความหลากหลายทางชีวภาพ ...',
                                         theme: 'snow',
                                     }"
                                 />
@@ -124,6 +197,23 @@
 
                                 <quill-editor
                                     class="mb-3"
+                                    ref="Myth"
+                                    v-model="myth"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder:
+                                            'ข้อมูลตำนานและเรื่องเล่า ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
                                     ref="Culture"
                                     v-model="culture"
                                     :options="{
@@ -133,7 +223,74 @@
                                                 ['image'],
                                             ],
                                         },
-                                        placeholder: 'ข้อมูลทางวัฒนธรรม ...',
+                                        placeholder:
+                                            'ข้อมูลมรดกทางวัฒนธรรม ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="Festival"
+                                    v-model="festival"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder:
+                                            'ข้อมูลงานประเพณีและเทศกาล ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="creativetourism"
+                                    v-model="creativetourism"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder:
+                                            'ข้อมูลการท่องเที่ยวสร้างสรรค์ ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="storytelling"
+                                    v-model="storytelling"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder: 'ข้อมูลStory Telling ...',
+                                        theme: 'snow',
+                                    }"
+                                />
+
+                                <quill-editor
+                                    class="mb-3"
+                                    ref="etc"
+                                    v-model="etc"
+                                    :options="{
+                                        modules: {
+                                            toolbar: [
+                                                ['bold', 'italic', 'underline'],
+                                                ['image'],
+                                            ],
+                                        },
+                                        placeholder: 'ข้อมูลน่าสนใจอื่นๆ ...',
                                         theme: 'snow',
                                     }"
                                 />
@@ -381,11 +538,20 @@ export default {
             culture: '',
             lat: '',
             lon: '',
+            register: '',
             org: '',
             phone: '',
             attraction: '',
             accessibility: '',
             accommodation: '',
+            geo: '',
+            eco: '',
+            biodiversity: '',
+            myth: '',
+            festival: '',
+            creativetourism: '',
+            storytelling: '',
+            etc: '',
             activities: [],
             amenities: [],
             id: this.$route.params.id,
@@ -696,6 +862,7 @@ export default {
                 category: this.category.join(),
                 lat: this.lat,
                 lon: this.lon,
+                register: this.register,
                 physical: this.physical,
                 nature: this.nature,
                 history: this.history,
@@ -703,6 +870,14 @@ export default {
                 attraction: this.attraction,
                 accessibility: this.accessibility,
                 accommodation: this.accommodation,
+                geo: this.geo,
+                eco: this.eco,
+                biodiversity: this.biodiversity,
+                myth: this.myth,
+                festival: this.festival,
+                creativetourism: this.creativetourism,
+                storytelling: this.storytelling,
+                etc: this.etc,
                 activities: this.activities.join(),
                 amenities: this.amenities.join(),
                 month: this.travelMonths.join(),
@@ -771,6 +946,7 @@ export default {
             this.img = this.result.img
             this.district = this.result.district
             this.subDistrict = this.result.subDistrict
+            this.register = this.result.register
             this.category =
                 this.result.category && this.result.category.split(',')
             this.physical = this.result.physical
@@ -790,6 +966,14 @@ export default {
                 this.result.month && this.result.month.split(',')
             this.org = this.result.org
             this.phone = this.result.phone
+            this.geo = this.result.geo
+            this.eco = this.result.eco
+            this.biodiversity = this.result.biodiversity
+            this.myth = this.result.myth
+            this.festival = this.result.festival
+            this.creativetourism = this.result.creativetourism
+            this.storytelling = this.result.storytelling
+            this.etc = this.result.etc
         },
     },
 
