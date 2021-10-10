@@ -598,18 +598,7 @@ export default {
                     label: '',
                 },
             ],
-            types: [
-                { text: 'เชิงนิเวศ', value: 'เชิงนิเวศ' },
-                { text: 'ทางธรรมชาติ', value: 'ทางธรรมชาติ' },
-                { text: 'ทางประวัติศาสตร์', value: 'ทางประวัติศาสตร์' },
-                { text: 'ทางวัฒนธรรม', value: 'ทางวัฒนธรรม' },
-                { text: 'โดยชุมชน', value: 'โดยชุมชน' },
-                { text: 'เชิงเกษตร', value: 'เชิงเกษตร' },
-                { text: 'เพื่อนันทนาการ', value: 'เพื่อนันทนาการ' },
-                { text: 'เชิงสุขภาพ', value: 'เชิงสุขภาพ' },
-                { text: 'ทางศิลปวิทยาการ', value: 'ทางศิลปวิทยาการ' },
-                { text: 'จุดหมายตา', value: 'จุดหมายตา' },
-            ],
+            types: [],
             actList: [],
             amenList: [],
             uploadRoute: '/upload',
@@ -774,7 +763,10 @@ export default {
         async fetch() {
             let res = await api.get(this.apiRoute)
             this.result = res.data
-
+            let res2 = await api.get('attractions/get-attraction-types')
+            res2.data.forEach(i => {
+                this.types.push(i.name)
+            })
             this.name = this.result.name
             this.img = this.result.img
             this.district = this.result.district
