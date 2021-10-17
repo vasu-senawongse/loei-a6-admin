@@ -427,90 +427,175 @@
                 </template>
             </div>
             <div class="md-layout-item md-medium-size-100 md-size-50">
-                <template>
-                    <form>
-                        <md-card>
-                            <md-card-header data-background-color="orange">
-                                <h4 class="title">
-                                    แกลอรี่รูปภาพ
-                                </h4>
-                            </md-card-header>
+                <div class="md-layout-item md-medium-size-100 md-size-100">
+                    <template>
+                        <form>
+                            <md-card>
+                                <md-card-header data-background-color="orange">
+                                    <h4 class="title">
+                                        แกลอรี่รูปภาพ
+                                    </h4>
+                                </md-card-header>
 
-                            <md-card-content>
-                                <b-form-file
-                                    :browse-text="'เลือกรูป'"
-                                    accept="image/*"
-                                    placeholder="
+                                <md-card-content>
+                                    <b-form-file
+                                        :browse-text="'เลือกรูป'"
+                                        accept="image/*"
+                                        placeholder="
 
                                             'Choose a file or drop it here...'
                                     "
-                                    v-model="thumbnail"
-                                    class="mb-3 mr-1"
-                                    style="width:75%"
-                                ></b-form-file>
-                                <b-button
-                                    variant="info"
-                                    @click="upload"
-                                    :disabled="thumbnail == null"
-                                >
-                                    อัพโหลด
-                                </b-button>
+                                        v-model="thumbnail"
+                                        class="mb-3 mr-1"
+                                        style="width:75%"
+                                    ></b-form-file>
+                                    <b-button
+                                        variant="info"
+                                        @click="upload"
+                                        :disabled="thumbnail == null"
+                                    >
+                                        อัพโหลด
+                                    </b-button>
 
-                                <b-table
-                                    :items="gallery"
-                                    :fields="fields"
-                                    id="image-list"
-                                    :per-page="perPage"
-                                    :current-page="currentPage"
-                                    hover
-                                    striped
-                                    small
-                                    responsive
-                                    sort-icon-left
-                                    style="width: 100%"
-                                >
-                                    <template v-slot:cell(img)="data">
-                                        <div style="width: 180px">
-                                            <img
-                                                :src="imgPath + data.item.img"
-                                                class="mb-3 fit-image"
-                                            />
-                                        </div>
-                                    </template>
+                                    <b-table
+                                        :items="gallery"
+                                        :fields="fields"
+                                        id="image-list"
+                                        :per-page="perPage"
+                                        :current-page="currentPage"
+                                        hover
+                                        striped
+                                        small
+                                        responsive
+                                        sort-icon-left
+                                        style="width: 100%"
+                                    >
+                                        <template v-slot:cell(img)="data">
+                                            <div style="width: 180px">
+                                                <img
+                                                    :src="
+                                                        imgPath + data.item.img
+                                                    "
+                                                    class="mb-3 fit-image"
+                                                />
+                                            </div>
+                                        </template>
 
-                                    <template v-slot:cell(btn)="data">
-                                        <b-button
-                                            class="m-1"
-                                            variant="warning"
-                                            :disabled="data.item.img == img"
-                                            @click="
-                                                selectThumbnail(data.item.img)
-                                            "
-                                        >
-                                            ตั้งเป็นรูปปก
-                                        </b-button>
+                                        <template v-slot:cell(btn)="data">
+                                            <b-button
+                                                class="m-1"
+                                                variant="warning"
+                                                :disabled="data.item.img == img"
+                                                @click="
+                                                    selectThumbnail(
+                                                        data.item.img
+                                                    )
+                                                "
+                                            >
+                                                ตั้งเป็นรูปปก
+                                            </b-button>
 
-                                        <b-button
-                                            class="m-1"
-                                            variant="danger"
-                                            :disabled="data.item.img == img"
-                                            @click="deleteImage(data.item)"
-                                        >
-                                            ลบ
-                                        </b-button>
-                                    </template>
-                                </b-table>
-                                <b-pagination
-                                    v-model="currentPage"
-                                    :total-rows="gallery.length"
-                                    :per-page="perPage"
-                                    aria-controls="image-list"
-                                    style="float:right"
-                                ></b-pagination>
-                            </md-card-content>
-                        </md-card>
-                    </form>
-                </template>
+                                            <b-button
+                                                class="m-1"
+                                                variant="danger"
+                                                :disabled="data.item.img == img"
+                                                @click="deleteImage(data.item)"
+                                            >
+                                                ลบ
+                                            </b-button>
+                                        </template>
+                                    </b-table>
+                                    <b-pagination
+                                        v-model="currentPage"
+                                        :total-rows="gallery.length"
+                                        :per-page="perPage"
+                                        aria-controls="image-list"
+                                        style="float:right"
+                                    ></b-pagination>
+                                </md-card-content>
+                            </md-card>
+                        </form>
+                    </template>
+                </div>
+                <div class="md-layout-item md-medium-size-100 md-size-100">
+                    <template>
+                        <form>
+                            <md-card>
+                                <md-card-header data-background-color="orange">
+                                    <h4 class="title">
+                                        เอกสารที่เกี่ยวข้อง
+                                    </h4>
+                                </md-card-header>
+
+                                <md-card-content>
+                                    <b-form-file
+                                        :browse-text="'เลือกไฟล์'"
+                                        placeholder="
+
+                                            'Choose a file or drop it here...'
+                                    "
+                                        v-model="file"
+                                        class="mb-3 mr-1"
+                                        style="width:75%"
+                                    ></b-form-file>
+                                    <b-button
+                                        variant="info"
+                                        @click="uploadMaterial"
+                                        :disabled="file == null"
+                                    >
+                                        อัพโหลด
+                                    </b-button>
+
+                                    <b-table
+                                        :items="material"
+                                        :fields="fields2"
+                                        id="material-list"
+                                        :per-page="perPage"
+                                        :current-page="matPage"
+                                        hover
+                                        striped
+                                        small
+                                        responsive
+                                        sort-icon-left
+                                        style="width: 100%"
+                                    >
+                                        <template v-slot:cell(name)="data">
+                                            <div style="width: 180px">
+                                                {{ data.item.file }}
+                                            </div>
+                                        </template>
+
+                                        <template v-slot:cell(m_order)="data">
+                                            <div style="width: 180px">
+                                                {{ data.item.m_order }}
+                                            </div>
+                                        </template>
+
+                                        <template v-slot:cell(btn)="data">
+                                            <b-button
+                                                class="m-1"
+                                                variant="danger"
+                                                :disabled="data.item.img == img"
+                                                @click="
+                                                    deleteMaterial(data.item)
+                                                "
+                                            >
+                                                ลบ
+                                            </b-button>
+                                        </template>
+                                    </b-table>
+                                    <b-pagination
+                                        v-model="matPage"
+                                        :total-rows="material.length"
+                                        :per-page="perPage"
+                                        aria-controls="material-list"
+                                        style="float:right"
+                                    ></b-pagination>
+                                </md-card-content>
+                            </md-card>
+                        </form>
+                    </template>
+                </div>
             </div>
         </div>
     </div>
@@ -524,6 +609,7 @@ export default {
     data() {
         return {
             currentPage: 1,
+            matPage: 1,
             perPage: 10,
             travelMonths: [],
             name: '',
@@ -534,6 +620,7 @@ export default {
             physical: '',
             nature: '',
             thumbnail: null,
+            file: null,
             history: '',
             culture: '',
             lat: '',
@@ -749,6 +836,21 @@ export default {
                     text: 'ธันวาคม',
                 },
             ],
+            fields2: [
+                {
+                    key: 'name',
+                    label: 'ไฟล์',
+                },
+                {
+                    key: 'm_order',
+                    label: 'ลำดับ',
+                    sortable: true,
+                },
+                {
+                    key: 'btn',
+                    label: '',
+                },
+            ],
             fields: [
                 {
                     key: 'img',
@@ -767,9 +869,12 @@ export default {
             types: [],
             actList: [],
             amenList: [],
+            material: [],
             uploadRoute: '/upload',
             insertRoute: `attractions/insert-attraction-image`,
+            insertMatRoute: `attractions/insert-attraction-document`,
             deleteRoute: `attractions/delete-attraction-image`,
+            deleteMatRoute: `attractions/delete-attraction-document`,
             selectRoute: `attractions/select-attraction-thumbnail`,
             amenRoute: `amenities/get-amenities`,
             actRoute: `activities/get-activities`,
@@ -779,6 +884,7 @@ export default {
                 'http://localhost:5000/images',
 
             imgRoute: `attractions/get-attraction-gallery-by-id/${this.$route.params.id}`,
+            matRoute: `attractions/get-attraction-material-by-id/${this.$route.params.id}`,
             gallery: [],
         }
     },
@@ -821,6 +927,37 @@ export default {
                 })
         },
 
+        async uploadMaterial() {
+            var model = {
+                file: this.file.name,
+                path: `attractions/${this.id}/${this.file.name}`,
+                attraction: this.id,
+                m_order:
+                    this.material.length == 0
+                        ? '0'
+                        : this.material[this.material.length - 1].order + 1,
+            }
+            await api.post(this.insertMatRoute, model)
+            let formData = new FormData()
+            formData.append('path', `${this.path}/${this.id}`)
+            formData.append('name', this.file.name)
+            formData.append('file', this.file)
+            let res = await api
+                .post(this.uploadRoute, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                .then(resss => {
+                    this.file = null
+                    this.fetchMaterial()
+                })
+                .catch(err => {
+                    if (err.resss.status === 400);
+                    this.$swal(err.resss.data, '', 'error')
+                })
+        },
+
         async deleteImage(img) {
             this.$swal({
                 title: 'ยืนยันลบรูป',
@@ -842,6 +979,38 @@ export default {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
                                     this.fetchImg()
+                                }
+                            })
+                        })
+                        .catch(err => {
+                            if (err.response.status === 400);
+                            this.$swal(err.response.data, '', 'error')
+                        })
+                }
+            })
+        },
+
+        async deleteMaterial(mat) {
+            this.$swal({
+                title: 'ยืนยันลบเอกสาร',
+                showDenyButton: true,
+                confirmButtonText: `ยืนยัน`,
+                denyButtonText: `ยกเลิก`,
+                allowOutsideClick: false,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    let resSubmit = api
+                        .delete(this.deleteMatRoute, mat)
+                        .then(result => {
+                            this.$swal({
+                                title: 'ลบเอกสารแล้ว',
+                                icon: 'success',
+                                confirmButtonText: 'ตกลง',
+                                allowOutsideClick: false,
+                            }).then(result => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    this.fetchMaterial()
                                 }
                             })
                         })
@@ -922,6 +1091,11 @@ export default {
             this.gallery = res2.data
         },
 
+        async fetchMaterial() {
+            let res = await api.get(this.matRoute)
+            this.material = res.data
+        },
+
         async fetchAct() {
             let res = await api.get(this.actRoute)
             res.data.forEach(i => {
@@ -982,6 +1156,7 @@ export default {
         this.fetchImg()
         this.fetchAmen()
         this.fetchAct()
+        this.fetchMaterial()
     },
 }
 </script>
