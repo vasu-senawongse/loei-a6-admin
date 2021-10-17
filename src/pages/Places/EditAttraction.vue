@@ -565,12 +565,6 @@
                                             </div>
                                         </template>
 
-                                        <template v-slot:cell(m_order)="data">
-                                            <div style="width: 180px">
-                                                {{ data.item.m_order }}
-                                            </div>
-                                        </template>
-
                                         <template v-slot:cell(btn)="data">
                                             <b-button
                                                 class="m-1"
@@ -841,11 +835,7 @@ export default {
                     key: 'name',
                     label: 'ไฟล์',
                 },
-                {
-                    key: 'm_order',
-                    label: 'ลำดับ',
-                    sortable: true,
-                },
+
                 {
                     key: 'btn',
                     label: '',
