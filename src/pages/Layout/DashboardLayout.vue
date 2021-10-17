@@ -16,6 +16,11 @@
                     <i class="fas fa-map-marker-alt"></i>
                     <p>แหล่งท่องเที่ยว</p>
                 </sidebar-link>
+                <sidebar-link to="/options">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>ตัวเลือกเพิ่มเติ่ม</p>
+                </sidebar-link>
+
                 <sidebar-link to="/hotels">
                     <i class="fas fa-hotel"></i>
                     <p>ที่พัก</p>
