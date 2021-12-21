@@ -94,12 +94,6 @@
                                     ref="Nature"
                                     v-model="nature"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder:
                                             'ข้อมูลคุณค่าทางธรรมชาติ ...',
                                         theme: 'snow',
@@ -111,12 +105,6 @@
                                     ref="Geo"
                                     v-model="geo"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder:
                                             'ข้อมูลทางธรณีวิทยาและซากดึกดำบรรพ์ ...',
                                         theme: 'snow',
@@ -128,12 +116,6 @@
                                     ref="Eco"
                                     v-model="eco"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder: 'ข้อมูลทางนิเวศวิทยา ...',
                                         theme: 'snow',
                                     }"
@@ -144,12 +126,6 @@
                                     ref="Biodiversity"
                                     v-model="biodiversity"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder:
                                             'ข้อมูลความหลากหลายทางชีวภาพ ...',
                                         theme: 'snow',
@@ -161,12 +137,6 @@
                                     ref="History"
                                     v-model="history"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder:
                                             'ข้อมูลทางประวัติศาสตร์ ...',
                                         theme: 'snow',
@@ -178,12 +148,6 @@
                                     ref="Myth"
                                     v-model="myth"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder:
                                             'ข้อมูลตำนานและเรื่องเล่า ...',
                                         theme: 'snow',
@@ -195,12 +159,6 @@
                                     ref="Culture"
                                     v-model="culture"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder:
                                             'ข้อมูลมรดกทางวัฒนธรรม ...',
                                         theme: 'snow',
@@ -212,12 +170,6 @@
                                     ref="Festival"
                                     v-model="festival"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder:
                                             'ข้อมูลงานประเพณีและเทศกาล ...',
                                         theme: 'snow',
@@ -229,12 +181,6 @@
                                     ref="creativetourism"
                                     v-model="creativetourism"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder:
                                             'ข้อมูลการท่องเที่ยวสร้างสรรค์ ...',
                                         theme: 'snow',
@@ -246,12 +192,6 @@
                                     ref="storytelling"
                                     v-model="storytelling"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder: 'ข้อมูลStory Telling ...',
                                         theme: 'snow',
                                     }"
@@ -262,12 +202,6 @@
                                     ref="etc"
                                     v-model="etc"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder: 'ข้อมูลน่าสนใจอื่นๆ ...',
                                         theme: 'snow',
                                     }"
@@ -278,12 +212,6 @@
                                     ref="attraction"
                                     v-model="attraction"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder: 'สิ่งดึงดูดใจ ...',
                                         theme: 'snow',
                                     }"
@@ -294,12 +222,6 @@
                                     ref="accessibility"
                                     v-model="accessibility"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder:
                                             'การเดินทางมายังแหล่งท่องเที่ยว ...',
                                         theme: 'snow',
@@ -311,12 +233,6 @@
                                     ref="accommodation"
                                     v-model="accommodation"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder: 'การบริการที่พัก ...',
                                         theme: 'snow',
                                     }"
