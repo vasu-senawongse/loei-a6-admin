@@ -84,12 +84,6 @@
                                     ref="Physical"
                                     v-model="physical"
                                     :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
                                         placeholder: 'ข้อมูลทางกายภาพ ...',
                                         theme: 'snow',
                                     }"
