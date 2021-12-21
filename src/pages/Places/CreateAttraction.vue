@@ -155,22 +155,6 @@
 
                                 <quill-editor
                                     class="mb-3"
-                                    ref="Eco"
-                                    v-model="eco"
-                                    :options="{
-                                        modules: {
-                                            toolbar: [
-                                                ['bold', 'italic', 'underline'],
-                                                ['image'],
-                                            ],
-                                        },
-                                        placeholder: 'ข้อมูลทางนิเวศวิทยา ...',
-                                        theme: 'snow',
-                                    }"
-                                />
-
-                                <quill-editor
-                                    class="mb-3"
                                     ref="Biodiversity"
                                     v-model="biodiversity"
                                     :options="{
