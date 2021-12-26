@@ -12,11 +12,14 @@
                             </md-card-header>
 
                             <md-card-content>
+                                <label>ชื่อร้านอาหาร</label>
                                 <b-input
                                     v-model="name"
                                     placeholder="ชื่อร้านอาหาร"
                                     class="mb-3"
                                 />
+
+                                <label>อำเภอ</label>
                                 <b-select
                                     alternative
                                     v-model="district"
@@ -24,6 +27,7 @@
                                     @change="subDistrict = ''"
                                     class="mb-3"
                                 />
+                                <label>ตำบล</label>
                                 <b-select
                                     alternative
                                     v-model="subDistrict"
@@ -36,23 +40,28 @@
                                     "
                                     class="mb-3"
                                 />
-
+                                <label>ละติจูด</label>
                                 <b-input
                                     v-model="lat"
                                     placeholder="Latitude"
                                     class="mb-3"
                                 />
+
+                                <label>ลองจิจูด</label>
                                 <b-input
                                     v-model="lon"
                                     placeholder="Lontitude"
                                     class="mb-3"
                                 />
+
+                                <label>เบอร์ติดต่อ</label>
                                 <b-input
                                     type="tel"
                                     v-model="phone"
                                     placeholder="เบอร์ติดต่อ"
                                     class="mb-3"
                                 />
+                                <label>แหล่งอ้างอิง</label>
                                 <b-input
                                     type="url"
                                     v-model="url"

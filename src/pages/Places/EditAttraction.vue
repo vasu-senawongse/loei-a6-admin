@@ -12,12 +12,14 @@
                             </md-card-header>
 
                             <md-card-content>
+                                <label for="name">ชื่อแหล่งท่องเที่ยว</label>
                                 <b-input
                                     v-model="name"
                                     placeholder="ชื่อแหล่งท่องเที่ยว"
                                     class="mb-3"
                                 />
 
+                                <label for="district">อำเภอ</label>
                                 <b-select
                                     alternative
                                     v-model="district"
@@ -26,6 +28,7 @@
                                     class="mb-3"
                                 />
 
+                                <label for="subDistrict">ตำบล</label>
                                 <b-select
                                     alternative
                                     v-model="subDistrict"
@@ -39,39 +42,41 @@
                                     class="mb-3"
                                 />
 
-                                <md-field>
-                                    <label for="category"
-                                        >ประเภทแหล่งท่องเที่ยว</label
+                                <label for="category"
+                                    >ประเภทแหล่งท่องเที่ยว</label
+                                >
+                                <md-select
+                                    v-model="category"
+                                    class="mb-3"
+                                    multiple
+                                    name="category"
+                                    id="category"
+                                >
+                                    <div
+                                        v-for="m in types"
+                                        v-bind:key="m.value"
                                     >
-                                    <md-select
-                                        v-model="category"
-                                        class="mb-3"
-                                        multiple
-                                        name="category"
-                                        id="category"
-                                    >
-                                        <div
-                                            v-for="m in types"
-                                            v-bind:key="m.value"
-                                        >
-                                            <md-option :value="m.value">{{
-                                                m.text
-                                            }}</md-option>
-                                        </div>
-                                    </md-select>
-                                </md-field>
+                                        <md-option :value="m.value">{{
+                                            m.text
+                                        }}</md-option>
+                                    </div>
+                                </md-select>
 
+                                <label for="lat">Latitude</label>
                                 <b-input
                                     v-model="lat"
                                     placeholder="Latitude"
                                     class="mb-3"
                                 />
 
+                                <label for="lon">Lontitude</label>
                                 <b-input
                                     v-model="lon"
                                     placeholder="Lontitude"
                                     class="mb-3"
                                 />
+
+                                <label for="name">register/ประกาศ</label>
 
                                 <b-input
                                     v-model="register"
@@ -79,6 +84,7 @@
                                     class="mb-3"
                                 />
 
+                                <label for="Physical">ข้อมูลทางกายภาพ</label>
                                 <quill-editor
                                     class="mb-3"
                                     ref="Physical"
@@ -89,6 +95,9 @@
                                     }"
                                 />
 
+                                <label for="Nature"
+                                    >ข้อมูลคุณค่าทางธรรมชาติ</label
+                                >
                                 <quill-editor
                                     class="mb-3"
                                     ref="Nature"
@@ -100,6 +109,9 @@
                                     }"
                                 />
 
+                                <label for="Geo"
+                                    >ข้อมูลทางธรณีวิทยาและซากดึกดำบรรพ์</label
+                                >
                                 <quill-editor
                                     class="mb-3"
                                     ref="Geo"
@@ -111,6 +123,8 @@
                                     }"
                                 />
 
+                                <label for="Eco">ข้อมูลทางนิเวศวิทยา</label>
+
                                 <quill-editor
                                     class="mb-3"
                                     ref="Eco"
@@ -120,6 +134,10 @@
                                         theme: 'snow',
                                     }"
                                 />
+
+                                <label for="Biodiversity"
+                                    >ข้อมูลความหลากหลายทางชีวภาพ</label
+                                >
 
                                 <quill-editor
                                     class="mb-3"
@@ -132,6 +150,10 @@
                                     }"
                                 />
 
+                                <label for="History"
+                                    >ข้อมูลทางประวัติศาสตร์</label
+                                >
+
                                 <quill-editor
                                     class="mb-3"
                                     ref="History"
@@ -143,6 +165,9 @@
                                     }"
                                 />
 
+                                <label for="Myth"
+                                    >ข้อมูลตำนานและเรื่องเล่า</label
+                                >
                                 <quill-editor
                                     class="mb-3"
                                     ref="Myth"
@@ -154,6 +179,9 @@
                                     }"
                                 />
 
+                                <label for="Culture"
+                                    >ข้อมูลมรดกทางวัฒนธรรม</label
+                                >
                                 <quill-editor
                                     class="mb-3"
                                     ref="Culture"
@@ -164,6 +192,10 @@
                                         theme: 'snow',
                                     }"
                                 />
+
+                                <label for="Festival"
+                                    >ข้อมูลงานประเพณีและเทศกาล</label
+                                >
 
                                 <quill-editor
                                     class="mb-3"
@@ -176,6 +208,9 @@
                                     }"
                                 />
 
+                                <label for="creativetourism"
+                                    >ข้อมูลการท่องเที่ยวสร้างสรรค์</label
+                                >
                                 <quill-editor
                                     class="mb-3"
                                     ref="creativetourism"
@@ -187,16 +222,19 @@
                                     }"
                                 />
 
+                                <label for="storytelling"
+                                    >ข้อมูล Story Telling</label
+                                >
                                 <quill-editor
                                     class="mb-3"
                                     ref="storytelling"
                                     v-model="storytelling"
                                     :options="{
-                                        placeholder: 'ข้อมูลStory Telling ...',
+                                        placeholder: 'ข้อมูล Story Telling ...',
                                         theme: 'snow',
                                     }"
                                 />
-
+                                <label for="etc">ข้อมูลน่าสนใจอื่นๆ</label>
                                 <quill-editor
                                     class="mb-3"
                                     ref="etc"
@@ -206,6 +244,8 @@
                                         theme: 'snow',
                                     }"
                                 />
+
+                                <label for="attraction">สิ่งดึงดูดใจ</label>
 
                                 <quill-editor
                                     class="mb-3"
@@ -217,6 +257,9 @@
                                     }"
                                 />
 
+                                <label for="accessibility"
+                                    >การเดินทางมายังแหล่งท่องเที่ยว</label
+                                >
                                 <quill-editor
                                     class="mb-3"
                                     ref="accessibility"
@@ -228,6 +271,9 @@
                                     }"
                                 />
 
+                                <label for="accommodation"
+                                    >การบริการที่พัก</label
+                                >
                                 <quill-editor
                                     class="mb-3"
                                     ref="accommodation"
@@ -300,12 +346,16 @@
                                         </div>
                                     </md-select>
                                 </md-field>
+
+                                <label for="org"
+                                    >ชื่อหน่วยงานที่รับผิดชอบ</label
+                                >
                                 <b-input
                                     v-model="org"
                                     placeholder="ชื่อหน่วยงานที่รับผิดชอบ"
                                     class="mb-3"
                                 />
-
+                                <label for="phone">เบอร์ติดต่อหน่วยงาน</label>
                                 <b-input
                                     v-model="phone"
                                     placeholder="เบอร์ติดต่อหน่วยงาน"
@@ -335,10 +385,7 @@
                                     <b-form-file
                                         :browse-text="'เลือกรูป'"
                                         accept="image/*"
-                                        placeholder="
-
-                                            'Choose a file or drop it here...'
-                                    "
+                                        placeholder="เลือกไฟล์ หรือ ลากไฟล์มาวาง"
                                         v-model="thumbnail"
                                         class="mb-3 mr-1"
                                         style="width:75%"
@@ -424,10 +471,7 @@
                                 <md-card-content>
                                     <b-form-file
                                         :browse-text="'เลือกไฟล์'"
-                                        placeholder="
-
-                                            'Choose a file or drop it here...'
-                                    "
+                                        placeholder="เลือกไฟล์ หรือ ลากไฟล์มาวาง"
                                         v-model="file"
                                         class="mb-3 mr-1"
                                         style="width:75%"

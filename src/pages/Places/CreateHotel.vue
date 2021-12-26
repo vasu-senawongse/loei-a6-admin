@@ -12,11 +12,14 @@
                             </md-card-header>
 
                             <md-card-content>
+                                <label>ชื่อที่พัก</label>
                                 <b-input
                                     v-model="name"
                                     placeholder="ชื่อที่พัก"
                                     class="mb-3"
                                 />
+
+                                <label>อำเภอ</label>
                                 <b-select
                                     alternative
                                     v-model="district"
@@ -24,6 +27,8 @@
                                     @change="subDistrict = ''"
                                     class="mb-3"
                                 />
+
+                                <label>ตำบล</label>
                                 <b-select
                                     alternative
                                     v-model="subDistrict"
@@ -36,28 +41,38 @@
                                     "
                                     class="mb-3"
                                 />
+
+                                <label>จำนวนห้องพัก</label>
                                 <b-input
                                     type="number"
                                     v-model="room"
                                     placeholder="จำนวนห้องพัก"
                                     class="mb-3"
                                 />
+
+                                <label>ละติจูด</label>
                                 <b-input
                                     v-model="lat"
                                     placeholder="Latitude"
                                     class="mb-3"
                                 />
+
+                                <label>ลองจิจูด</label>
                                 <b-input
                                     v-model="lon"
                                     placeholder="Lontitude"
                                     class="mb-3"
                                 />
+
+                                <label>เบอร์ติดต่อ</label>
                                 <b-input
                                     type="tel"
                                     v-model="phone"
                                     placeholder="เบอร์ติดต่อ"
                                     class="mb-3"
                                 />
+
+                                <label>แหล่งอ้างอิง</label>
                                 <b-input
                                     type="url"
                                     v-model="url"

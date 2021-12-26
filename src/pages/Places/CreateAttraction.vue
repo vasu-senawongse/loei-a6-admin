@@ -15,19 +15,19 @@
                             <md-card-content>
                                 <b-form-file
                                     browse-text="เลือกรูป"
-                                    placeholder="Choose a file or drop it here..."
-                                    drop-placeholder="Drop file here..."
+                                    placeholder="เลือกไฟล์ หรือ ลากไฟล์มาวาง"
                                     v-model="thumbnail"
                                     accept="image/*"
                                     class="mb-3"
                                 ></b-form-file>
-
+                                <label for="name">ชื่อแหล่งท่องเที่ยว</label>
                                 <b-input
                                     v-model="name"
                                     placeholder="ชื่อแหล่งท่องเที่ยว"
                                     class="mb-3"
                                 />
 
+                                <label for="district">อำเภอ</label>
                                 <b-select
                                     alternative
                                     v-model="district"
@@ -36,6 +36,7 @@
                                     class="mb-3"
                                 />
 
+                                <label for="subDistrict">ตำบล</label>
                                 <b-select
                                     alternative
                                     v-model="subDistrict"
@@ -70,12 +71,14 @@
                                         </div>
                                     </md-select>
                                 </md-field>
+
+                                <label for="Latitude">ละติจูด</label>
                                 <b-input
                                     v-model="lat"
                                     placeholder="Latitude"
                                     class="mb-3"
                                 />
-
+                                <label for="Lontitude">ลองจิจูด</label>
                                 <b-input
                                     v-model="lon"
                                     placeholder="Lontitude"
