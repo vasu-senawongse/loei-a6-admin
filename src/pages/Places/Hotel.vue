@@ -6,7 +6,9 @@
             >
                 <div style="float:right;margin-right:50px">
                     <a :href="'/hotels/create'">
-                        <md-button class="md-raised md-info">เพิ่ม</md-button>
+                        <md-button class="md-raised md-info"
+                            ><i class="fas fa-plus"
+                        /></md-button>
                     </a>
                 </div>
                 <md-card>
@@ -69,14 +71,14 @@
                                     <a :href="'/hotels/' + data.item.id">
                                         <md-button
                                             class="md-raised md-warning mr-2"
-                                            >แก้ไข</md-button
-                                        >
+                                            ><i class="fas fa-edit"></i
+                                        ></md-button>
                                     </a>
                                     <md-button
                                         class="md-raised md-danger mr-2"
                                         @click="deleteHotel(data.item)"
-                                        >ลบ</md-button
-                                    >
+                                        ><i class="fas fa-trash"></i
+                                    ></md-button>
                                 </template>
                             </b-table>
                             <b-pagination

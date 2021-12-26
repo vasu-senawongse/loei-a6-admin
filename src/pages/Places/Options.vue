@@ -25,8 +25,8 @@
                             <md-button
                                 class="md-raised md-info"
                                 @click="addType"
-                                >เพิ่ม</md-button
-                            >
+                                ><i class="fas fa-plus"></i
+                            ></md-button>
                         </div>
                     </md-card-header>
                     <md-card-content>
@@ -44,6 +44,17 @@
                                 responsive
                                 style="width: 100%"
                             >
+                                <template v-slot:cell(btn)="data">
+                                    <md-button class="md-raised md-warning mr-2"
+                                        ><i class="fas fa-edit"></i
+                                    ></md-button>
+
+                                    <md-button
+                                        class="md-raised md-danger mr-2"
+                                        @click="deleteType(data.item.id)"
+                                        ><i class="fas fa-trash"></i
+                                    ></md-button>
+                                </template>
                             </b-table>
                             <b-pagination
                                 v-model="currentPage"
@@ -79,8 +90,8 @@
                             </md-field>
 
                             <md-button class="md-raised md-info" @click="addAct"
-                                >เพิ่ม</md-button
-                            >
+                                ><i class="fas fa-plus"
+                            /></md-button>
                         </div>
                     </md-card-header>
                     <md-card-content>
@@ -98,6 +109,17 @@
                                 responsive
                                 style="width: 100%"
                             >
+                                <template v-slot:cell(btn)="data">
+                                    <md-button class="md-raised md-warning mr-2"
+                                        ><i class="fas fa-edit"></i
+                                    ></md-button>
+
+                                    <md-button
+                                        class="md-raised md-danger mr-2"
+                                        @click="deleteAct(data.item.id)"
+                                        ><i class="fas fa-trash"></i
+                                    ></md-button>
+                                </template>
                             </b-table>
                             <b-pagination
                                 v-model="actPage"
@@ -138,8 +160,8 @@
                             <md-button
                                 class="md-raised md-info"
                                 @click="addAmen"
-                                >เพิ่ม</md-button
-                            >
+                                ><i class="fas fa-plus"
+                            /></md-button>
                         </div>
                     </md-card-header>
                     <md-card-content>
@@ -157,6 +179,17 @@
                                 responsive
                                 style="width: 100%"
                             >
+                                <template v-slot:cell(btn)="data">
+                                    <md-button class="md-raised md-warning mr-2"
+                                        ><i class="fas fa-edit"></i
+                                    ></md-button>
+
+                                    <md-button
+                                        class="md-raised md-danger mr-2"
+                                        @click="deleteAmen(data.item.id)"
+                                        ><i class="fas fa-trash"></i
+                                    ></md-button>
+                                </template>
                             </b-table>
                             <b-pagination
                                 v-model="amenPage"
@@ -185,6 +218,8 @@ export default {
             perPage: 10,
             apiRoute: `attractions/get-attraction-types`,
             addRoute: `attractions/add-options`,
+            editRoute: `attractions/edit-options`,
+            deleteRoute: `attractions/delete-options`,
             apiRoute2: `amenities/get-amenities`,
             apiRoute3: `activities/get-activities`,
             result: [],
@@ -196,8 +231,13 @@ export default {
             fields: [
                 {
                     key: 'name',
-                    label: 'ประเภท',
+                    label: 'ชื่อ',
                     sortable: true,
+                },
+
+                {
+                    key: 'btn',
+                    label: '',
                 },
             ],
         }
@@ -212,6 +252,81 @@ export default {
                 .then(result => {
                     this.$swal({
                         title: 'เพิ่มประเภทแล้ว',
+                        icon: 'success',
+                        confirmButtonText: 'ตกลง',
+                        allowOutsideClick: false,
+                    }).then(result => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            this.fetch()
+                        }
+                    })
+                })
+                .catch(err => {
+                    if (err.response.status === 400);
+                    this.$swal(err.response.data, '', 'error')
+                })
+        },
+
+        async deleteType(id) {
+            var model = {
+                type: 'TYPE',
+                id: id,
+            }
+            api.delete(this.deleteRoute, model)
+                .then(result => {
+                    this.$swal({
+                        title: 'ลบประเภทแหล่งแล้ว',
+                        icon: 'success',
+                        confirmButtonText: 'ตกลง',
+                        allowOutsideClick: false,
+                    }).then(result => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            this.fetch()
+                        }
+                    })
+                })
+                .catch(err => {
+                    if (err.response.status === 400);
+                    this.$swal(err.response.data, '', 'error')
+                })
+        },
+
+        async deleteAmen(id) {
+            var model = {
+                type: 'AMEN',
+                id: id,
+            }
+            api.delete(this.deleteRoute, model)
+                .then(result => {
+                    this.$swal({
+                        title: 'ลบสิ่งอำนวยความสะดวกแล้ว',
+                        icon: 'success',
+                        confirmButtonText: 'ตกลง',
+                        allowOutsideClick: false,
+                    }).then(result => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            this.fetch()
+                        }
+                    })
+                })
+                .catch(err => {
+                    if (err.response.status === 400);
+                    this.$swal(err.response.data, '', 'error')
+                })
+        },
+
+        async deleteAct(id) {
+            var model = {
+                type: 'ACT',
+                id: id,
+            }
+            api.delete(this.deleteRoute, model)
+                .then(result => {
+                    this.$swal({
+                        title: 'ลบกิจกรรมแล้ว',
                         icon: 'success',
                         confirmButtonText: 'ตกลง',
                         allowOutsideClick: false,
