@@ -116,7 +116,6 @@ export default {
         TopAttraction,
         Contact,
         TopSearch,
-        TopDate,
     },
     data() {
         return {
