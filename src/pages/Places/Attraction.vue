@@ -89,7 +89,7 @@
                                 v-model="currentPage"
                                 :total-rows="
                                     search == null
-                                        ? result.name
+                                        ? result.length
                                         : result.filter(i =>
                                               i.name
                                                   .toLowerCase()
