@@ -2,7 +2,7 @@
     <div class="content">
         <div class="md-layout">
             <div
-                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
             >
                 <top-attraction
                     :chart-options="topSearchChart.options"
@@ -13,16 +13,6 @@
                 </top-attraction>
             </div>
 
-            <div
-                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-            >
-                <top-date
-                    :chart-options="topDateChart.options"
-                    :chart-type="'Line'"
-                    data-background-color="blue"
-                >
-                </top-date>
-            </div>
             <div
                 class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
             >
@@ -120,7 +110,6 @@ import Contact from './panel/Contact'
 import api from '@/services/api.js'
 import TopAttraction from './panel/TopAttraction.vue'
 import TopSearch from './panel/TopSearch.vue'
-import TopDate from './panel/TopDate.vue'
 export default {
     components: {
         StatsCard,
