@@ -142,9 +142,10 @@ export default {
                     label: 'อำเภอ',
                     sortable: true,
                 },
+
                 {
-                    key: 'updatedAt',
-                    label: 'แก้ไขล่าสุดเมื่อ',
+                    key: 'view',
+                    label: 'การเข้าชม (ครั้ง)',
                     sortable: true,
                 },
                 {
