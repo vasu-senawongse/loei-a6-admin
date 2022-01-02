@@ -83,9 +83,9 @@ export default {
         },
     },
     async mounted() {
-        // if (!this.user || !this.user.roles.includes('ADMIN')) {
-        //   this.$router.push({ name: 'Login' });
-        // }
+        if (!this.user || !this.user.roles.includes('ADMIN')) {
+            this.$router.push({ name: 'Login' })
+        }
     },
 }
 </script>

@@ -4,7 +4,7 @@
             <template slot="content">
                 <span class="md-nav-tabs-title">Tasks:</span>
                 <md-tabs class="md-success" md-alignment="left">
-                    <md-tab id="tab-home" md-label="ALL" md-icon="home">
+                    <md-tab id="tab-home" md-label="ทั้งหมด" md-icon="home">
                         <b-table
                             :items="result"
                             :fields="fields"
@@ -40,15 +40,19 @@
 
                             <template v-slot:cell(btn)="data">
                                 <b-button
-                                    variant="success"
+                                    variant="danger"
                                     @click="doneTask(data.item._id)"
-                                    >DONE</b-button
-                                >
+                                    ><i class="fas fa-trash"></i
+                                ></b-button>
                             </template>
                         </b-table>
                     </md-tab>
 
-                    <md-tab id="tab-req" md-label="REQUEST" md-icon="support">
+                    <md-tab
+                        id="tab-req"
+                        md-label="ขอความช่วยเหลือ"
+                        md-icon="support"
+                    >
                         <b-table
                             :items="result.filter(i => i.type == 'REQUEST')"
                             :fields="fields"
@@ -84,15 +88,15 @@
 
                             <template v-slot:cell(btn)="data">
                                 <b-button
-                                    variant="success"
+                                    variant="danger"
                                     @click="doneTask(data.item._id)"
-                                    >DONE</b-button
-                                >
+                                    ><i class="fas fa-trash"></i
+                                ></b-button>
                             </template>
                         </b-table>
                     </md-tab>
 
-                    <md-tab id="tab-q" md-label="QUESTION" md-icon="help">
+                    <md-tab id="tab-q" md-label="สอบถาม" md-icon="help">
                         <b-table
                             :items="result.filter(i => i.type == 'QUESTION')"
                             :fields="fields"
@@ -128,15 +132,19 @@
 
                             <template v-slot:cell(btn)="data">
                                 <b-button
-                                    variant="success"
+                                    variant="danger"
                                     @click="doneTask(data.item._id)"
-                                    >DONE</b-button
-                                >
+                                    ><i class="fas fa-trash"></i
+                                ></b-button>
                             </template>
                         </b-table>
                     </md-tab>
 
-                    <md-tab id="tab-inform" md-label="INFORM" md-icon="report">
+                    <md-tab
+                        id="tab-inform"
+                        md-label="แจ้งข้อมูล"
+                        md-icon="report"
+                    >
                         <b-table
                             :items="result.filter(i => i.type == 'INFORM')"
                             :fields="fields"
@@ -172,15 +180,15 @@
 
                             <template v-slot:cell(btn)="data">
                                 <b-button
-                                    variant="success"
+                                    variant="danger"
                                     @click="doneTask(data.item._id)"
-                                    >DONE</b-button
-                                >
+                                    ><i class="fas fa-trash"></i
+                                ></b-button>
                             </template>
                         </b-table>
                     </md-tab>
 
-                    <md-tab id="tab-more" md-label="OTHER" md-icon="more">
+                    <md-tab id="tab-more" md-label="อื่นๆ" md-icon="more">
                         <b-table
                             :items="result.filter(i => i.type == 'OTHER')"
                             :fields="fields"
@@ -216,10 +224,10 @@
 
                             <template v-slot:cell(btn)="data">
                                 <b-button
-                                    variant="success"
+                                    variant="danger"
                                     @click="doneTask(data.item._id)"
-                                    >DONE</b-button
-                                >
+                                    ><i class="fas fa-trash"></i
+                                ></b-button>
                             </template>
                         </b-table>
                     </md-tab>
