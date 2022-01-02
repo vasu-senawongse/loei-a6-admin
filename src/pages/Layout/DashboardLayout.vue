@@ -33,6 +33,10 @@
                     <i class="fas fa-file"></i>
                     <p>เอกสารที่เกี่ยวข้อง</p>
                 </sidebar-link>
+                <sidebar-link to="/organization">
+                    <i class="fas fa-briefcase"></i>
+                    <p>หน่วยงานที่เกี่ยวข้อง</p>
+                </sidebar-link>
                 <sidebar-link to="/logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <p>กลับหน้าหลัก</p>
