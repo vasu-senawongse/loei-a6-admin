@@ -24,6 +24,7 @@
 
                             <md-button
                                 class="md-raised md-info"
+                                :disabled="!newType"
                                 @click="addType"
                                 ><i class="fas fa-plus"></i
                             ></md-button>
@@ -45,7 +46,9 @@
                                 style="width: 100%"
                             >
                                 <template v-slot:cell(btn)="data">
-                                    <md-button class="md-raised md-warning mr-2"
+                                    <md-button
+                                        class="md-raised md-warning mr-2"
+                                        @click="editOption(data.item, 'TYPE')"
                                         ><i class="fas fa-edit"></i
                                     ></md-button>
 
@@ -89,7 +92,10 @@
                                 ></md-input>
                             </md-field>
 
-                            <md-button class="md-raised md-info" @click="addAct"
+                            <md-button
+                                class="md-raised md-info"
+                                @click="addAct"
+                                :disabled="!newAct"
                                 ><i class="fas fa-plus"
                             /></md-button>
                         </div>
@@ -110,7 +116,9 @@
                                 style="width: 100%"
                             >
                                 <template v-slot:cell(btn)="data">
-                                    <md-button class="md-raised md-warning mr-2"
+                                    <md-button
+                                        class="md-raised md-warning mr-2"
+                                        @click="editOption(data.item, 'ACT')"
                                         ><i class="fas fa-edit"></i
                                     ></md-button>
 
@@ -160,6 +168,7 @@
                             <md-button
                                 class="md-raised md-info"
                                 @click="addAmen"
+                                :disabled="!newAmen"
                                 ><i class="fas fa-plus"
                             /></md-button>
                         </div>
@@ -180,7 +189,9 @@
                                 style="width: 100%"
                             >
                                 <template v-slot:cell(btn)="data">
-                                    <md-button class="md-raised md-warning mr-2"
+                                    <md-button
+                                        class="md-raised md-warning mr-2"
+                                        @click="editOption(data.item, 'AMEN')"
                                         ><i class="fas fa-edit"></i
                                     ></md-button>
 
@@ -203,6 +214,32 @@
                 </md-card>
             </div>
         </div>
+        <div>
+            <b-modal
+                id="edit-option"
+                ref="edit-option"
+                :title="
+                    editingType == 'TYPE'
+                        ? 'แก้ไขประเภทแหล่ง'
+                        : editingType == 'AMEN'
+                        ? 'แก้ไขสิ่งอำนวยความสะดวก'
+                        : 'แก้ไขกิจกรรม'
+                "
+                hide-footer
+            >
+                <p class="my-4">
+                    <b-input
+                        v-model="newName"
+                        type="text"
+                        placeholder="แก้ไขตัวเลือก"
+                        required
+                    ></b-input>
+                </p>
+                <b-button type="button" variant="warning" @click="edit()"
+                    ><i class="fas fa-edit"></i
+                ></b-button>
+            </b-modal>
+        </div>
     </div>
 </template>
 
@@ -222,6 +259,9 @@ export default {
             deleteRoute: `attractions/delete-options`,
             apiRoute2: `amenities/get-amenities`,
             apiRoute3: `activities/get-activities`,
+            editingOption: null,
+            newName: '',
+            editingType: null,
             result: [],
             amenities: [],
             activities: [],
@@ -382,6 +422,43 @@ export default {
                     }).then(result => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
+                            this.fetch()
+                        }
+                    })
+                })
+                .catch(err => {
+                    if (err.response.status === 400);
+                    this.$swal(err.response.data, '', 'error')
+                })
+        },
+
+        async editOption(option, type) {
+            this.editingOption = option
+            this.editingType = type
+            this.newName = this.editingOption.name
+            this.$refs['edit-option'].show()
+        },
+
+        async edit() {
+            var model = {
+                type: this.editingType,
+                id: this.editingOption.id,
+                name: this.newName,
+            }
+            api.post(this.editRoute, model)
+                .then(result => {
+                    this.$swal({
+                        title: 'แก้ไขตัวเลือกแล้ว',
+                        icon: 'success',
+                        confirmButtonText: 'ตกลง',
+                        allowOutsideClick: false,
+                    }).then(result => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            this.editingOption = null
+                            this.editingType = null
+                            this.newName = ''
+                            this.$refs['edit-option'].hide()
                             this.fetch()
                         }
                     })
