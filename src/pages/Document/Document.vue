@@ -10,9 +10,5 @@
 </template>
 
 <script>
-export default {
-    async created() {
-        window.open('http://pubhtml5.com/', '_blank')
-    },
-}
+export default {}
 </script>
