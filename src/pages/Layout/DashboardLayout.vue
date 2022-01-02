@@ -17,7 +17,7 @@
                     <p>แหล่งท่องเที่ยว</p>
                 </sidebar-link>
                 <sidebar-link to="/options">
-                    <i class="fas fa-map-marker-alt"></i>
+                    <i class="fas fa-cog"></i>
                     <p>ตัวเลือกเพิ่มเติ่ม</p>
                 </sidebar-link>
 
@@ -28,6 +28,10 @@
                 <sidebar-link to="/restaurants">
                     <i class="fas fa-utensils"></i>
                     <p>ร้านอาหาร</p>
+                </sidebar-link>
+                <sidebar-link to="/document">
+                    <i class="fas fa-file"></i>
+                    <p>เอกสารที่เกี่ยวข้อง</p>
                 </sidebar-link>
                 <sidebar-link to="/logout">
                     <i class="fas fa-sign-out-alt"></i>

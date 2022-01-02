@@ -41,7 +41,7 @@
                             <template v-slot:cell(btn)="data">
                                 <b-button
                                     variant="danger"
-                                    @click="doneTask(data.item._id)"
+                                    @click="doneTask(data.item.id)"
                                     ><i class="fas fa-trash"></i
                                 ></b-button>
                             </template>
@@ -89,7 +89,7 @@
                             <template v-slot:cell(btn)="data">
                                 <b-button
                                     variant="danger"
-                                    @click="doneTask(data.item._id)"
+                                    @click="doneTask(data.item.id)"
                                     ><i class="fas fa-trash"></i
                                 ></b-button>
                             </template>
@@ -133,7 +133,7 @@
                             <template v-slot:cell(btn)="data">
                                 <b-button
                                     variant="danger"
-                                    @click="doneTask(data.item._id)"
+                                    @click="doneTask(data.item.id)"
                                     ><i class="fas fa-trash"></i
                                 ></b-button>
                             </template>
@@ -181,7 +181,7 @@
                             <template v-slot:cell(btn)="data">
                                 <b-button
                                     variant="danger"
-                                    @click="doneTask(data.item._id)"
+                                    @click="doneTask(data.item.id)"
                                     ><i class="fas fa-trash"></i
                                 ></b-button>
                             </template>
@@ -225,7 +225,7 @@
                             <template v-slot:cell(btn)="data">
                                 <b-button
                                     variant="danger"
-                                    @click="doneTask(data.item._id)"
+                                    @click="doneTask(data.item.id)"
                                     ><i class="fas fa-trash"></i
                                 ></b-button>
                             </template>
