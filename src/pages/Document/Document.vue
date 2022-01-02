@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         เพิ่มเติมเอกสารที่เกี่ยวข้องได้ที่
-        <a href="http://pubhtml5.com/">http://pubhtml5.com/</a>
+        <a href="http://pubhtml5.com/" target="_blank">http://pubhtml5.com/</a>
     </div>
 </template>
 
