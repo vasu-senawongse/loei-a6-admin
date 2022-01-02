@@ -12,7 +12,10 @@
                     <md-icon>dashboard</md-icon>
                     <p>Dashboard</p>
                 </sidebar-link>
-                <sidebar-link to="/users">
+                <sidebar-link
+                    to="/users"
+                    v-if="user && user.roles == 'SUPERADMIN'"
+                >
                     <i class="fas fa-user"></i>
                     <p>ผู้ดูแลระบบ</p>
                 </sidebar-link>
@@ -95,7 +98,7 @@ export default {
         },
     },
     async mounted() {
-        if (!this.user || !this.user.roles.includes('ADMIN')) {
+        if (!this.user) {
             this.$router.push({ name: 'Login' })
         }
     },
