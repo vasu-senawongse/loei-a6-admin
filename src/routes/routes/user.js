@@ -1,14 +1,14 @@
-import Users from '@/pages/User/Users.vue';
-import UserProfile from '@/pages/User/UserProfile.vue';
+import User from '@/pages/Users/User.vue';
+import UserProfile from '@/pages/Users/UserProfile.vue';
 export default [
   {
     path: 'users/:id',
-    name: 'User Profile',
+    name: 'UserProfile',
     component: UserProfile,
   },
   {
     path: 'users',
     name: 'Users',
-    component: Users,
+    component: User,
   },
 ];
