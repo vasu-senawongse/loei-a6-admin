@@ -1,5 +1,6 @@
 <template>
     <div class="content">
+        เพิ่มเติมเอกสารที่เกี่ยวข้องได้ที่
         <a href="http://pubhtml5.com/">http://pubhtml5.com/</a>
     </div>
 </template>
@@ -8,7 +9,6 @@
 export default {
     async created() {
         window.open('http://pubhtml5.com/', '_blank')
-        this.$router.push({ name: 'Dashboard' })
     },
 }
 </script>
