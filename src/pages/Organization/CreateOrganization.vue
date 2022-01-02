@@ -82,7 +82,20 @@ export default {
             result: {},
             uploadRoute: '/upload',
             path: 'public/images/organizations',
-            types: [],
+            types: [
+                {
+                    value: 1,
+                    text: 'หน่วยงาน อพท.',
+                },
+                {
+                    value: 2,
+                    text: 'หน่วยงานในจังหวัดเลย',
+                },
+                {
+                    value: 3,
+                    text: 'หน่วยงานส่วนกลาง',
+                },
+            ],
         }
     },
     methods: {
@@ -110,16 +123,10 @@ export default {
                 await this.upload()
             }
             var model = {
-                id: this.id,
                 img: this.img,
-                name: this.name,
-                district: this.district,
-                subDistrict: this.subDistrict,
-                category: this.category.join(),
-                lat: this.lat,
-                lon: this.lon,
-                createdAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-                updatedAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                org: this.org,
+                type: this.type,
+                url: this.url,
             }
             this.$swal({
                 title: 'เพิ่มหน่วยงานที่เกี่ยวข้อง',
@@ -141,9 +148,7 @@ export default {
                             }).then(result => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
-                                    this.$router.push({
-                                        path: `/attractions/${this.id}`,
-                                    })
+                                    this.$router.push('Organization')
                                 }
                             })
                         })

@@ -5,7 +5,7 @@
                 class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
             >
                 <div style="float:right;margin-right:50px">
-                    <a :href="'/attractions/create'">
+                    <a :href="'/organization/create'">
                         <md-button class="md-raised md-info"
                             ><i class="fas fa-plus"
                         /></md-button>
@@ -76,12 +76,6 @@
                                     }}</span>
                                 </template>
                                 <template v-slot:cell(btn)="data">
-                                    <a :href="'/attractions/' + data.item.id">
-                                        <md-button
-                                            class="md-raised md-warning mr-2"
-                                            ><i class="fas fa-edit"></i
-                                        ></md-button>
-                                    </a>
                                     <md-button
                                         class="md-raised md-danger mr-2"
                                         @click="deleteAttraction(data.item)"
