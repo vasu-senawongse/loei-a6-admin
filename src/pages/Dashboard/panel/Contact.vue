@@ -136,9 +136,9 @@
                         </b-table>
                     </md-tab>
 
-                    <md-tab id="tab-report" md-label="REPORT" md-icon="report">
+                    <md-tab id="tab-inform" md-label="INFORM" md-icon="report">
                         <b-table
-                            :items="result.filter(i => i.type == 'REPORT')"
+                            :items="result.filter(i => i.type == 'INFORM')"
                             :fields="fields"
                             hover
                             striped
