@@ -2,7 +2,7 @@
     <div class="content">
         <div class="md-layout">
             <div
-                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
+                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
             >
                 <top-attraction
                     :chart-options="topSearchChart.options"
@@ -13,19 +13,6 @@
                 </top-attraction>
             </div>
 
-            <div
-                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-            >
-                <top-search
-                    :chart-options="topAttractionChart.options"
-                    :chart-responsive-options="
-                        topAttractionChart.responsiveOptions
-                    "
-                    :chart-type="'Bar'"
-                    data-background-color="green"
-                >
-                </top-search>
-            </div>
             <div
                 class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
             >
@@ -109,13 +96,11 @@ import { StatsCard } from '@/components'
 import Contact from './panel/Contact'
 import api from '@/services/api.js'
 import TopAttraction from './panel/TopAttraction.vue'
-import TopSearch from './panel/TopSearch.vue'
 export default {
     components: {
         StatsCard,
         TopAttraction,
         Contact,
-        TopSearch,
     },
     data() {
         return {
