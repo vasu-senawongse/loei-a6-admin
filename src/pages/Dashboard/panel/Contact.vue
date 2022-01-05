@@ -215,11 +215,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{
-                                    new Date(
-                                        data.item.createdAt
-                                    ).toLocaleString('en-GB')
-                                }}
+                                {{ new Date(data.item.createdAt) }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
