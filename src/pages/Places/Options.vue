@@ -288,6 +288,7 @@ export default {
                 type: 'TYPE',
                 name: this.newType,
             }
+
             api.post(this.addRoute, model)
                 .then(result => {
                     this.$swal({
@@ -313,24 +314,34 @@ export default {
                 type: 'TYPE',
                 id: id,
             }
-            api.delete(this.deleteRoute, model)
-                .then(result => {
-                    this.$swal({
-                        title: 'ลบประเภทแหล่งแล้ว',
-                        icon: 'success',
-                        confirmButtonText: 'ตกลง',
-                        allowOutsideClick: false,
-                    }).then(result => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            this.fetch()
-                        }
-                    })
-                })
-                .catch(err => {
-                    if (err.response.status === 400);
-                    this.$swal(err.response.data, '', 'error')
-                })
+            this.$swal({
+                title: 'ยืนยันลบประเภท',
+                showDenyButton: true,
+                confirmButtonText: `ยืนยัน`,
+                denyButtonText: `ยกเลิก`,
+                allowOutsideClick: false,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    api.post(this.addRoute, model)
+                        .then(result => {
+                            this.$swal({
+                                title: 'ลบตัวเลือกประเภทแล้ว',
+                                icon: 'success',
+                                confirmButtonText: 'ตกลง',
+                                allowOutsideClick: false,
+                            }).then(result => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    this.fetch()
+                                }
+                            })
+                        })
+                        .catch(err => {
+                            if (err.response.status === 400);
+                            this.$swal(err.response.data, '', 'error')
+                        })
+                }
+            })
         },
 
         async deleteAmen(id) {
@@ -338,24 +349,34 @@ export default {
                 type: 'AMEN',
                 id: id,
             }
-            api.delete(this.deleteRoute, model)
-                .then(result => {
-                    this.$swal({
-                        title: 'ลบสิ่งอำนวยความสะดวกแล้ว',
-                        icon: 'success',
-                        confirmButtonText: 'ตกลง',
-                        allowOutsideClick: false,
-                    }).then(result => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            this.fetch()
-                        }
-                    })
-                })
-                .catch(err => {
-                    if (err.response.status === 400);
-                    this.$swal(err.response.data, '', 'error')
-                })
+            this.$swal({
+                title: 'ยืนยันลบสิ่งอำนวยความสะดวก',
+                showDenyButton: true,
+                confirmButtonText: `ยืนยัน`,
+                denyButtonText: `ยกเลิก`,
+                allowOutsideClick: false,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    api.delete(this.deleteRoute, model)
+                        .then(result => {
+                            this.$swal({
+                                title: 'ลบสิ่งอำนวยความสะดวกแล้ว',
+                                icon: 'success',
+                                confirmButtonText: 'ตกลง',
+                                allowOutsideClick: false,
+                            }).then(result => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    this.fetch()
+                                }
+                            })
+                        })
+                        .catch(err => {
+                            if (err.response.status === 400);
+                            this.$swal(err.response.data, '', 'error')
+                        })
+                }
+            })
         },
 
         async deleteAct(id) {
@@ -363,24 +384,34 @@ export default {
                 type: 'ACT',
                 id: id,
             }
-            api.delete(this.deleteRoute, model)
-                .then(result => {
-                    this.$swal({
-                        title: 'ลบกิจกรรมแล้ว',
-                        icon: 'success',
-                        confirmButtonText: 'ตกลง',
-                        allowOutsideClick: false,
-                    }).then(result => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            this.fetch()
-                        }
-                    })
-                })
-                .catch(err => {
-                    if (err.response.status === 400);
-                    this.$swal(err.response.data, '', 'error')
-                })
+            this.$swal({
+                title: 'ยืนยันลบกิจกรรม',
+                showDenyButton: true,
+                confirmButtonText: `ยืนยัน`,
+                denyButtonText: `ยกเลิก`,
+                allowOutsideClick: false,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    api.delete(this.deleteRoute, model)
+                        .then(result => {
+                            this.$swal({
+                                title: 'ลบกิจกรรมแล้ว',
+                                icon: 'success',
+                                confirmButtonText: 'ตกลง',
+                                allowOutsideClick: false,
+                            }).then(result => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    this.fetch()
+                                }
+                            })
+                        })
+                        .catch(err => {
+                            if (err.response.status === 400);
+                            this.$swal(err.response.data, '', 'error')
+                        })
+                }
+            })
         },
 
         async addAmen() {

@@ -284,10 +284,34 @@ export default {
             const data = {
                 id: id,
             }
-            let res = await api.post(this.verifyRoute, data)
-            if (res.data) {
-                this.fetch()
-            }
+            this.$swal({
+                title: 'ยืนยันลบข้อความนี้',
+                showDenyButton: true,
+                confirmButtonText: `ยืนยัน`,
+                denyButtonText: `ยกเลิก`,
+                allowOutsideClick: false,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    api.post(this.verifyRoute, data)
+                        .then(res => {
+                            this.$swal({
+                                title: 'ลบข้อความแล้ว',
+                                icon: 'success',
+                                confirmButtonText: 'ตกลง',
+                                allowOutsideClick: false,
+                            }).then(result => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    this.fetch()
+                                }
+                            })
+                        })
+                        .catch(err => {
+                            if (err.response.status === 400);
+                            this.$swal(err.response.data, '', 'error')
+                        })
+                }
+            })
         },
     },
     async mounted() {
