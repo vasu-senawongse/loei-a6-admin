@@ -322,7 +322,7 @@ export default {
                 allowOutsideClick: false,
             }).then(result => {
                 if (result.isConfirmed) {
-                    api.post(this.addRoute, model)
+                    api.delete(this.deleteRoute, model)
                         .then(result => {
                             this.$swal({
                                 title: 'ลบตัวเลือกประเภทแล้ว',
