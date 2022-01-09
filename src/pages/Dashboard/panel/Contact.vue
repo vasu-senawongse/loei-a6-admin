@@ -31,7 +31,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{ data.item.createdAt }}
+                                {{ getFormatDate(data.item.createdAt) }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
@@ -219,6 +219,7 @@
 <script>
 import { NavTabsCard } from '@/components'
 import api from '@/services/api.js'
+import moment from 'moment'
 export default {
     components: { NavTabsCard },
     data() {
@@ -263,6 +264,11 @@ export default {
         async fetch() {
             let res = await api.get(this.apiRoute)
             this.result = res.data
+        },
+        getFormatDate(date) {
+            return moment(new Date(date))
+                .locale('th')
+                .format('ll LT')
         },
         async doneTask(id) {
             const data = {
