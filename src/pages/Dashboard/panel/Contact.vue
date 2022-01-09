@@ -215,7 +215,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{ new Date(data.item.createdAt) }}
+                                {{ data.item.createdAt }}
                             </template>
 
                             <template v-slot:cell(btn)="data">

@@ -66,13 +66,6 @@
                                         />
                                     </div>
                                 </template>
-                                <template v-slot:cell(updatedAt)="data">
-                                    <span>{{
-                                        new Date(
-                                            data.item.updatedAt
-                                        ).toLocaleString('en-GB')
-                                    }}</span>
-                                </template>
                                 <template v-slot:cell(btn)="data">
                                     <a :href="'/attractions/' + data.item.id">
                                         <md-button
