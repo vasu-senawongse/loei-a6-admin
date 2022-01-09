@@ -268,6 +268,7 @@ export default {
         getFormatDate(date) {
             return moment(new Date(date))
                 .locale('th')
+                .add(543, 'year')
                 .format('ll LT')
         },
         async doneTask(id) {
