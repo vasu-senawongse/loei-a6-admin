@@ -2,216 +2,263 @@
     <div>
         <nav-tabs-card>
             <template slot="content">
-                <span class="md-nav-tabs-title">Tasks:</span>
-                <md-tabs class="md-success" md-alignment="left">
-                    <md-tab id="tab-home" md-label="ทั้งหมด" md-icon="home">
-                        <b-table
-                            :items="result"
-                            :fields="fields"
-                            hover
-                            striped
-                            small
-                            responsive
-                            style="width: 100%"
-                        >
-                            <template v-slot:cell(title)="data">
-                                {{ data.item.title }}
-                            </template>
-
-                            <template v-slot:cell(message)="data">
-                                <div
-                                    v-html="
-                                        data.item.message && data.item.message
-                                    "
-                                ></div>
-                            </template>
-
-                            <template v-slot:cell(user)="data">
-                                {{ data.item.user }}
-                            </template>
-
-                            <template v-slot:cell(createdAt)="data">
-                                {{ getFormatDate(data.item.createdAt) }}
-                            </template>
-
-                            <template v-slot:cell(btn)="data">
-                                <b-button
-                                    variant="danger"
-                                    @click="doneTask(data.item.id)"
-                                    ><i class="fas fa-trash"></i
-                                ></b-button>
-                            </template>
-                        </b-table>
-                    </md-tab>
-
-                    <md-tab
-                        id="tab-req"
-                        md-label="ขอความช่วยเหลือ"
-                        md-icon="support"
+                <div class="md-layout">
+                    <div
+                        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
                     >
-                        <b-table
-                            :items="result.filter(i => i.type == 'REQUEST')"
-                            :fields="fields"
-                            hover
-                            striped
-                            small
-                            responsive
-                            style="width: 100%"
-                        >
-                            <template v-slot:cell(title)="data">
-                                {{ data.item.title }}
-                            </template>
-
-                            <template v-slot:cell(message)="data">
+                        <md-card>
+                            <md-card-header data-background-color="red">
                                 <div
-                                    v-html="
-                                        data.item.message && data.item.message
-                                    "
-                                ></div>
-                            </template>
+                                    class="md-layout-item md-small-size-100 md-size-50"
+                                >
+                                    <h4 class="title">ขอความช่วยเหลือ</h4>
+                                </div>
+                            </md-card-header>
+                            <md-card-content>
+                                <div>
+                                    <b-table
+                                        :items="
+                                            result.filter(
+                                                i => i.type == 'REQUEST'
+                                            )
+                                        "
+                                        :fields="fields"
+                                        hover
+                                        striped
+                                        small
+                                        responsive
+                                        style="width: 100%"
+                                    >
+                                        <template v-slot:cell(title)="data">
+                                            {{ data.item.title }}
+                                        </template>
 
-                            <template v-slot:cell(user)="data">
-                                {{ data.item.user }}
-                            </template>
+                                        <template v-slot:cell(message)="data">
+                                            <div
+                                                v-html="
+                                                    data.item.message &&
+                                                        data.item.message
+                                                "
+                                            ></div>
+                                        </template>
 
-                            <template v-slot:cell(createdAt)="data">
-                                {{ getFormatDate(data.item.createdAt) }}
-                            </template>
+                                        <template v-slot:cell(user)="data">
+                                            {{ data.item.user }}
+                                        </template>
 
-                            <template v-slot:cell(btn)="data">
-                                <b-button
-                                    variant="danger"
-                                    @click="doneTask(data.item.id)"
-                                    ><i class="fas fa-trash"></i
-                                ></b-button>
-                            </template>
-                        </b-table>
-                    </md-tab>
+                                        <template v-slot:cell(createdAt)="data">
+                                            {{
+                                                getFormatDate(
+                                                    data.item.createdAt
+                                                )
+                                            }}
+                                        </template>
 
-                    <md-tab id="tab-q" md-label="สอบถาม" md-icon="help">
-                        <b-table
-                            :items="result.filter(i => i.type == 'QUESTION')"
-                            :fields="fields"
-                            hover
-                            striped
-                            small
-                            responsive
-                            style="width: 100%"
-                        >
-                            <template v-slot:cell(title)="data">
-                                {{ data.item.title }}
-                            </template>
+                                        <template v-slot:cell(btn)="data">
+                                            <b-button
+                                                variant="danger"
+                                                @click="doneTask(data.item.id)"
+                                                ><i class="fas fa-trash"></i
+                                            ></b-button>
+                                        </template>
+                                    </b-table>
+                                </div>
+                            </md-card-content>
+                        </md-card>
+                    </div>
 
-                            <template v-slot:cell(message)="data">
-                                <div
-                                    v-html="
-                                        data.item.message && data.item.message
-                                    "
-                                ></div>
-                            </template>
-
-                            <template v-slot:cell(user)="data">
-                                {{ data.item.user }}
-                            </template>
-
-                            <template v-slot:cell(createdAt)="data">
-                                {{ getFormatDate(data.item.createdAt) }}
-                            </template>
-
-                            <template v-slot:cell(btn)="data">
-                                <b-button
-                                    variant="danger"
-                                    @click="doneTask(data.item.id)"
-                                    ><i class="fas fa-trash"></i
-                                ></b-button>
-                            </template>
-                        </b-table>
-                    </md-tab>
-
-                    <md-tab
-                        id="tab-inform"
-                        md-label="แจ้งข้อมูล"
-                        md-icon="report"
+                    <div
+                        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
                     >
-                        <b-table
-                            :items="result.filter(i => i.type == 'INFORM')"
-                            :fields="fields"
-                            hover
-                            striped
-                            small
-                            responsive
-                            style="width: 100%"
-                        >
-                            <template v-slot:cell(title)="data">
-                                {{ data.item.title }}
-                            </template>
-
-                            <template v-slot:cell(message)="data">
+                        <md-card>
+                            <md-card-header data-background-color="green">
                                 <div
-                                    v-html="
-                                        data.item.message && data.item.message
-                                    "
-                                ></div>
-                            </template>
+                                    class="md-layout-item md-small-size-100 md-size-50"
+                                >
+                                    <h4 class="title">สอบถาม</h4>
+                                </div>
+                            </md-card-header>
+                            <md-card-content>
+                                <div>
+                                    <b-table
+                                        :items="
+                                            result.filter(
+                                                i => i.type == 'QUESTION'
+                                            )
+                                        "
+                                        :fields="fields"
+                                        hover
+                                        striped
+                                        small
+                                        responsive
+                                        style="width: 100%"
+                                    >
+                                        <template v-slot:cell(title)="data">
+                                            {{ data.item.title }}
+                                        </template>
 
-                            <template v-slot:cell(user)="data">
-                                {{ data.item.user }}
-                            </template>
+                                        <template v-slot:cell(message)="data">
+                                            <div
+                                                v-html="
+                                                    data.item.message &&
+                                                        data.item.message
+                                                "
+                                            ></div>
+                                        </template>
 
-                            <template v-slot:cell(createdAt)="data">
-                                {{ getFormatDate(data.item.createdAt) }}
-                            </template>
+                                        <template v-slot:cell(user)="data">
+                                            {{ data.item.user }}
+                                        </template>
 
-                            <template v-slot:cell(btn)="data">
-                                <b-button
-                                    variant="danger"
-                                    @click="doneTask(data.item.id)"
-                                    ><i class="fas fa-trash"></i
-                                ></b-button>
-                            </template>
-                        </b-table>
-                    </md-tab>
+                                        <template v-slot:cell(createdAt)="data">
+                                            {{
+                                                getFormatDate(
+                                                    data.item.createdAt
+                                                )
+                                            }}
+                                        </template>
 
-                    <md-tab id="tab-more" md-label="อื่นๆ" md-icon="more">
-                        <b-table
-                            :items="result.filter(i => i.type == 'OTHER')"
-                            :fields="fields"
-                            hover
-                            striped
-                            small
-                            responsive
-                            style="width: 100%"
-                        >
-                            <template v-slot:cell(title)="data">
-                                {{ data.item.title }}
-                            </template>
+                                        <template v-slot:cell(btn)="data">
+                                            <b-button
+                                                variant="danger"
+                                                @click="doneTask(data.item.id)"
+                                                ><i class="fas fa-trash"></i
+                                            ></b-button>
+                                        </template>
+                                    </b-table>
+                                </div>
+                            </md-card-content>
+                        </md-card>
+                    </div>
 
-                            <template v-slot:cell(message)="data">
+                    <div
+                        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
+                    >
+                        <md-card>
+                            <md-card-header data-background-color="orange">
                                 <div
-                                    v-html="
-                                        data.item.message && data.item.message
-                                    "
-                                ></div>
-                            </template>
+                                    class="md-layout-item md-small-size-100 md-size-50"
+                                >
+                                    <h4 class="title">แจ้งข้อมูล</h4>
+                                </div>
+                            </md-card-header>
+                            <md-card-content>
+                                <div>
+                                    <b-table
+                                        :items="
+                                            result.filter(
+                                                i => i.type == 'INFORM'
+                                            )
+                                        "
+                                        :fields="fields"
+                                        hover
+                                        striped
+                                        small
+                                        responsive
+                                        style="width: 100%"
+                                    >
+                                        <template v-slot:cell(title)="data">
+                                            {{ data.item.title }}
+                                        </template>
 
-                            <template v-slot:cell(user)="data">
-                                {{ data.item.user }}
-                            </template>
+                                        <template v-slot:cell(message)="data">
+                                            <div
+                                                v-html="
+                                                    data.item.message &&
+                                                        data.item.message
+                                                "
+                                            ></div>
+                                        </template>
 
-                            <template v-slot:cell(createdAt)="data">
-                                {{ getFormatDate(data.item.createdAt) }}
-                            </template>
+                                        <template v-slot:cell(user)="data">
+                                            {{ data.item.user }}
+                                        </template>
 
-                            <template v-slot:cell(btn)="data">
-                                <b-button
-                                    variant="danger"
-                                    @click="doneTask(data.item.id)"
-                                    ><i class="fas fa-trash"></i
-                                ></b-button>
-                            </template>
-                        </b-table>
-                    </md-tab>
-                </md-tabs>
+                                        <template v-slot:cell(createdAt)="data">
+                                            {{
+                                                getFormatDate(
+                                                    data.item.createdAt
+                                                )
+                                            }}
+                                        </template>
+
+                                        <template v-slot:cell(btn)="data">
+                                            <b-button
+                                                variant="danger"
+                                                @click="doneTask(data.item.id)"
+                                                ><i class="fas fa-trash"></i
+                                            ></b-button>
+                                        </template>
+                                    </b-table>
+                                </div>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+
+                    <div
+                        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
+                    >
+                        <md-card>
+                            <md-card-header data-background-color="blue">
+                                <div
+                                    class="md-layout-item md-small-size-100 md-size-50"
+                                >
+                                    <h4 class="title">อื่นๆ</h4>
+                                </div>
+                            </md-card-header>
+                            <md-card-content>
+                                <div>
+                                    <b-table
+                                        :items="
+                                            result.filter(
+                                                i => i.type == 'OTHER'
+                                            )
+                                        "
+                                        :fields="fields"
+                                        hover
+                                        striped
+                                        small
+                                        responsive
+                                        style="width: 100%"
+                                    >
+                                        <template v-slot:cell(title)="data">
+                                            {{ data.item.title }}
+                                        </template>
+
+                                        <template v-slot:cell(message)="data">
+                                            <div
+                                                v-html="
+                                                    data.item.message &&
+                                                        data.item.message
+                                                "
+                                            ></div>
+                                        </template>
+
+                                        <template v-slot:cell(user)="data">
+                                            {{ data.item.user }}
+                                        </template>
+
+                                        <template v-slot:cell(createdAt)="data">
+                                            {{
+                                                getFormatDate(
+                                                    data.item.createdAt
+                                                )
+                                            }}
+                                        </template>
+
+                                        <template v-slot:cell(btn)="data">
+                                            <b-button
+                                                variant="danger"
+                                                @click="doneTask(data.item.id)"
+                                                ><i class="fas fa-trash"></i
+                                            ></b-button>
+                                        </template>
+                                    </b-table>
+                                </div>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
             </template>
         </nav-tabs-card>
     </div>
@@ -236,10 +283,7 @@ export default {
                     key: 'phone',
                     label: 'เบอร์ติดต่อ',
                 },
-                {
-                    key: 'type',
-                    label: 'ประเภท',
-                },
+
                 {
                     key: 'title',
                     label: 'หัวข้อ',
