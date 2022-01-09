@@ -75,7 +75,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{ data.item.createdAt }}
+                                {{ getFormatDate(data.item.createdAt) }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
@@ -115,7 +115,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{ data.item.createdAt }}
+                                {{ getFormatDate(data.item.createdAt) }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
@@ -159,7 +159,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{ data.item.createdAt }}
+                                {{ getFormatDate(data.item.createdAt) }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
@@ -199,7 +199,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{ data.item.createdAt }}
+                                {{ getFormatDate(data.item.createdAt) }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
