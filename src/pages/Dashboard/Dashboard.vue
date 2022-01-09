@@ -39,7 +39,7 @@
                     </template>
 
                     <template slot="content">
-                        <p class="category">โรงแรม</p>
+                        <p class="category">สถานที่พัก</p>
                         <h3 class="title">
                             {{ result && result.hotel }}
                             <small>แห่ง</small>

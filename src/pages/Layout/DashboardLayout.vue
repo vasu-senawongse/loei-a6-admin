@@ -30,7 +30,7 @@
 
                 <sidebar-link to="/hotels">
                     <i class="fas fa-hotel"></i>
-                    <p>ที่พัก</p>
+                    <p>สถานที่พัก</p>
                 </sidebar-link>
                 <sidebar-link to="/restaurants">
                     <i class="fas fa-utensils"></i>

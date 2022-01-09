@@ -7,15 +7,15 @@
                         <md-card>
                             <md-card-header data-background-color="blue">
                                 <h4 class="title">
-                                    แก้ไขที่พัก
+                                    แก้ไขสถานที่พัก
                                 </h4>
                             </md-card-header>
 
                             <md-card-content>
-                                <label>ชื่อที่พัก</label>
+                                <label>ชื่อสถานที่พัก</label>
                                 <b-input
                                     v-model="name"
-                                    placeholder="ชื่อที่พัก"
+                                    placeholder="ชื่อสถานที่พัก"
                                     class="mb-3"
                                 />
 

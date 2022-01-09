@@ -272,14 +272,14 @@
                                 />
 
                                 <label for="accommodation"
-                                    >การบริการที่พัก</label
+                                    >การบริการสถานที่พัก</label
                                 >
                                 <quill-editor
                                     class="mb-3"
                                     ref="accommodation"
                                     v-model="accommodation"
                                     :options="{
-                                        placeholder: 'การบริการที่พัก ...',
+                                        placeholder: 'การบริการสถานที่พัก ...',
                                         theme: 'snow',
                                     }"
                                 />

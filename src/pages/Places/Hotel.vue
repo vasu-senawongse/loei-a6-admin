@@ -16,7 +16,7 @@
                         <div
                             class="md-layout-item md-small-size-100 md-size-50"
                         >
-                            <h4 class="title">ที่พัก</h4>
+                            <h4 class="title">สถานที่พัก</h4>
                         </div>
                         <div
                             class="md-layout-item md-small-size-100 md-size-50"
@@ -124,7 +124,7 @@ export default {
             fields: [
                 {
                     key: 'name',
-                    label: 'ที่พัก',
+                    label: 'สถานที่พัก',
                     sortable: true,
                 },
                 {
@@ -159,7 +159,7 @@ export default {
                 id: hotel.id,
             }
             this.$swal({
-                title: 'ยืนยันลบที่พัก',
+                title: 'ยืนยันลบสถานที่พัก',
                 text: hotel.name,
                 showDenyButton: true,
                 confirmButtonText: `ยืนยัน`,
@@ -171,7 +171,7 @@ export default {
                         .delete(this.deleteRoute, model)
                         .then(result => {
                             this.$swal({
-                                title: 'ลบที่พักแล้ว',
+                                title: 'ลบสถานที่พักแล้ว',
                                 icon: 'success',
                                 confirmButtonText: 'ตกลง',
                                 allowOutsideClick: false,
