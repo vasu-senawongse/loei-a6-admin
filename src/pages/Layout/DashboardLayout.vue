@@ -12,6 +12,10 @@
                     <md-icon>dashboard</md-icon>
                     <p>Dashboard</p>
                 </sidebar-link>
+                <sidebar-link to="/tutorial">
+                    <i class="fas fa-book"></i>
+                    <p>คู่มือการใช้งาน</p>
+                </sidebar-link>
                 <sidebar-link
                     to="/users"
                     v-if="user && user.roles == 'SUPERADMIN'"
