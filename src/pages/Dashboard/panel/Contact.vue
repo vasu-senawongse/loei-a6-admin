@@ -31,11 +31,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{
-                                    new Date(
-                                        data.item.createdAt
-                                    ).toLocaleString('en-GB')
-                                }}
+                                {{ data.item.createdAt }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
@@ -79,11 +75,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{
-                                    new Date(
-                                        data.item.createdAt
-                                    ).toLocaleString('en-GB')
-                                }}
+                                {{ data.item.createdAt }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
@@ -123,11 +115,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{
-                                    new Date(
-                                        data.item.createdAt
-                                    ).toLocaleString('en-GB')
-                                }}
+                                {{ data.item.createdAt }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
@@ -171,11 +159,7 @@
                             </template>
 
                             <template v-slot:cell(createdAt)="data">
-                                {{
-                                    new Date(
-                                        data.item.createdAt
-                                    ).toLocaleString('en-GB')
-                                }}
+                                {{ data.item.createdAt }}
                             </template>
 
                             <template v-slot:cell(btn)="data">
