@@ -317,8 +317,34 @@
                                         id="amenities"
                                     >
                                         <div
-                                            v-for="m in amenList"
+                                            v-for="m in amenList.filter(
+                                                i => i.type == 1
+                                            )"
                                             v-bind:key="'amen-' + m.value"
+                                        >
+                                            <md-option :value="m.value">{{
+                                                m.text
+                                            }}</md-option>
+                                        </div>
+                                    </md-select>
+                                </md-field>
+
+                                <md-field>
+                                    <label for="amenitiesForAll"
+                                        >สิ่งอำนวยความสะดวกเพื่อคนทั้งมวล</label
+                                    >
+                                    <md-select
+                                        v-model="amenitiesForAll"
+                                        class="mb-3"
+                                        multiple
+                                        name="amenitiesForAll"
+                                        id="amenitiesForAll"
+                                    >
+                                        <div
+                                            v-for="m in amenList.filter(
+                                                i => i.type == 2
+                                            )"
+                                            v-bind:key="'amenFa-' + m.value"
                                         >
                                             <md-option :value="m.value">{{
                                                 m.text
@@ -573,6 +599,7 @@ export default {
             etc: '',
             activities: [],
             amenities: [],
+            amenitiesForAll: [],
             id: this.$route.params.id,
             apiRoute: `attractions/get-attraction-by-id/${this.$route.params.id}`,
             editRoute: `attractions/update-attraction-by-id`,
@@ -977,6 +1004,7 @@ export default {
                 etc: this.etc,
                 activities: this.activities.join(),
                 amenities: this.amenities.join(),
+                amenitiesForAll: this.amenitiesForAll.join(),
                 month: this.travelMonths.join(),
                 org: this.org,
                 phone: this.phone,
@@ -1034,7 +1062,11 @@ export default {
         async fetchAmen() {
             let res = await api.get(this.amenRoute)
             res.data.forEach(i => {
-                this.amenList.push({ text: i.name, value: i.name })
+                this.amenList.push({
+                    text: i.name,
+                    value: i.name,
+                    type: i.type,
+                })
             })
         },
         async fetch() {
@@ -1062,6 +1094,9 @@ export default {
             this.accommodation = this.result.accommodation
             this.amenities =
                 this.result.amenities && this.result.amenities.split(',')
+            this.amenitiesForAll =
+                this.result.amenitiesForAll &&
+                this.result.amenitiesForAll.split(',')
             this.activities =
                 this.result.activities && this.result.activities.split(',')
             this.travelMonths =

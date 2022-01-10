@@ -281,7 +281,7 @@
                                     <md-button
                                         class="md-raised md-danger mr-2"
                                         @click="
-                                            deleteAmen(data.item.id, 'AMENFA')
+                                            deleteOption(data.item.id, 'AMENFA')
                                         "
                                         ><i class="fas fa-trash"></i
                                     ></md-button>
