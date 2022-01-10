@@ -4,6 +4,8 @@ import Document from '@/pages/Document/Document.vue';
 import Tutorial from '@/pages/Tutorial/Tutorial.vue';
 import Organization from '@/pages/Organization/Organization.vue';
 import CreateOrganization from '@/pages/Organization/CreateOrganization.vue';
+import Product from '@/pages/Product/Product.vue';
+import CreateProduct from '@/pages/Product/CreateProduct.vue';
 import Place from './routes/place';
 import Auth from './routes/auth';
 import User from './routes/user';
@@ -36,6 +38,16 @@ const routes = [
         path: 'organization/create',
         name: 'CreateOrganization',
         component: CreateOrganization,
+      },
+      {
+        path: 'product',
+        name: 'Product',
+        component: Product,
+      },
+      {
+        path: 'product/create',
+        name: 'CreateProduct',
+        component: CreateProduct,
       },
       {
         path: '/tutorial',

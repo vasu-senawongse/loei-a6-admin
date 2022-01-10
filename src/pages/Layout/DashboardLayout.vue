@@ -48,6 +48,10 @@
                     <i class="fas fa-briefcase"></i>
                     <p>หน่วยงานที่เกี่ยวข้อง</p>
                 </sidebar-link>
+                <sidebar-link to="/product">
+                    <i class="fas fa-gift"></i>
+                    <p>ผลิตภัณฑ์และสินค้า</p>
+                </sidebar-link>
                 <sidebar-link to="/logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <p>กลับหน้าหลัก</p>

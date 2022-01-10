@@ -7,7 +7,7 @@
                         <md-card>
                             <md-card-header data-background-color="blue">
                                 <h4 class="title">
-                                    เพิ่มหน่วยงานที่เกี่ยวข้อง
+                                    ผลิตภัณฑ์และสินค้า
                                 </h4>
                                 <!-- <p class="category">Complete your profile</p> -->
                             </md-card-header>
@@ -20,36 +20,35 @@
                                     accept="image/*"
                                     class="mb-3"
                                 ></b-form-file>
-                                <label for="name">ชื่อหน่วยงาน</label>
+                                <label for="name"
+                                    >ชื่อผลิตภัณฑ์หรือสินค้า</label
+                                >
                                 <b-input
-                                    v-model="org"
-                                    placeholder="ชื่อหน่วยงาน"
+                                    v-model="name"
+                                    placeholder="ชื่อผลิตภัณฑ์หรือสินค้า"
                                     class="mb-3"
                                 />
 
-                                <md-field>
-                                    <label for="type">ประเภทหน่วยงาน</label>
-                                    <md-select
-                                        v-model="type"
-                                        class="mb-3"
-                                        name="type"
-                                        id="type"
-                                    >
-                                        <div
-                                            v-for="m in types"
-                                            v-bind:key="m.value"
-                                        >
-                                            <md-option :value="m.value">{{
-                                                m.text
-                                            }}</md-option>
-                                        </div>
-                                    </md-select>
-                                </md-field>
+                                <label for="description">คำอธิบาย</label>
+                                <b-form-textarea
+                                    v-model="description"
+                                    placeholder="คำอธิบาย"
+                                    class="mb-3"
+                                    rows="3"
+                                    max-rows="6"
+                                ></b-form-textarea>
 
-                                <label for="name">ลิงก์</label>
+                                <label for="name">ชื่อร้านค้า</label>
                                 <b-input
-                                    v-model="url"
-                                    placeholder="ลิงก์"
+                                    v-model="shop"
+                                    placeholder="ชื่อร้านค้า"
+                                    class="mb-3"
+                                />
+
+                                <label for="phone">เบอร์ติดต่อ</label>
+                                <b-input
+                                    v-model="phone"
+                                    placeholder="เบอร์ติดต่อ"
                                     class="mb-3"
                                 />
 
@@ -66,36 +65,22 @@
 </template>
 
 <script>
-import moment from 'moment'
 import api from '@/services/api.js'
 export default {
     components: {},
     data() {
         return {
-            org: '',
+            name: '',
             img: '',
-            type: '',
-            url: '',
+            shop: '',
+            phone: '',
+            description: '',
             thumbnail: null,
             id: 0,
-            apiRoute: `organizations/create-organization`,
+            apiRoute: `products/create-product`,
             result: {},
             uploadRoute: '/upload',
-            path: 'public/images/organizations',
-            types: [
-                {
-                    value: 1,
-                    text: 'หน่วยงาน อพท.',
-                },
-                {
-                    value: 2,
-                    text: 'หน่วยงานในจังหวัดเลย',
-                },
-                {
-                    value: 3,
-                    text: 'หน่วยงานส่วนกลาง',
-                },
-            ],
+            path: 'public/images/products',
         }
     },
     methods: {
@@ -111,7 +96,7 @@ export default {
                     },
                 })
                 .then(resss => {
-                    this.img = `organizations/${this.thumbnail.name}`
+                    this.img = `products/${this.thumbnail.name}`
                 })
                 .catch(err => {
                     if (err.resss.status === 400);
@@ -124,13 +109,14 @@ export default {
             }
             var model = {
                 img: this.img,
-                org: this.org,
-                type: this.type,
-                url: this.url,
+                name: this.name,
+                phone: this.phone,
+                description: this.description,
+                shop: this.shop,
             }
             this.$swal({
-                title: 'เพิ่มหน่วยงานที่เกี่ยวข้อง',
-                text: this.org,
+                title: 'เพิ่มผลิตภัณฑ์',
+                text: this.name,
                 showDenyButton: true,
                 confirmButtonText: `ยืนยัน`,
                 denyButtonText: `ยกเลิก`,
@@ -141,14 +127,14 @@ export default {
                         .post(this.apiRoute, model)
                         .then(result => {
                             this.$swal({
-                                title: 'เพิ่มหน่วยงานที่เกี่ยวข้องแล้ว',
+                                title: 'เพิ่มผลิตภัณฑ์แล้ว',
                                 icon: 'success',
                                 confirmButtonText: 'ตกลง',
                                 allowOutsideClick: false,
                             }).then(result => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
-                                    this.$router.push('Organization')
+                                    this.$router.push({ name: 'Product' })
                                 }
                             })
                         })
