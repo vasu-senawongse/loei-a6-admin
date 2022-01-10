@@ -9,7 +9,7 @@ import EditHotel from '@/pages/Places/EditHotel.vue'
 import Restaurant from '@/pages/Places/Restaurant.vue'
 import CreateRestaurant from '@/pages/Places/CreateRestaurant.vue'
 import EditRestaurant from '@/pages/Places/EditRestaurant.vue'
-import Options from '@/pages/Places/Options.vue'
+import Options from '@/pages/Options/Options.vue'
 
 export default [
     {

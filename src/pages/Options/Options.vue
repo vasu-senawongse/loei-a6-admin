@@ -2,7 +2,7 @@
     <div class="content">
         <div class="md-layout">
             <div
-                class="md-layout-item md-medium-size-100 md-xsmall-size-33 md-size-33"
+                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
             >
                 <md-card>
                     <md-card-header data-background-color="green">
@@ -25,7 +25,7 @@
                             <md-button
                                 class="md-raised md-info"
                                 :disabled="!newType"
-                                @click="addType"
+                                @click="addOption(newType, 'TYPE')"
                                 ><i class="fas fa-plus"></i
                             ></md-button>
                         </div>
@@ -54,7 +54,9 @@
 
                                     <md-button
                                         class="md-raised md-danger mr-2"
-                                        @click="deleteType(data.item.id)"
+                                        @click="
+                                            deleteOption(data.item.id, 'TYPE')
+                                        "
                                         ><i class="fas fa-trash"></i
                                     ></md-button>
                                 </template>
@@ -72,7 +74,7 @@
             </div>
 
             <div
-                class="md-layout-item md-medium-size-100 md-xsmall-size-33 md-size-33"
+                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
             >
                 <md-card>
                     <md-card-header data-background-color="green">
@@ -94,7 +96,7 @@
 
                             <md-button
                                 class="md-raised md-info"
-                                @click="addAct"
+                                @click="addOption(newAct, 'ACT')"
                                 :disabled="!newAct"
                                 ><i class="fas fa-plus"
                             /></md-button>
@@ -124,7 +126,9 @@
 
                                     <md-button
                                         class="md-raised md-danger mr-2"
-                                        @click="deleteAct(data.item.id)"
+                                        @click="
+                                            deleteOption(data.item.id, 'ACT')
+                                        "
                                         ><i class="fas fa-trash"></i
                                     ></md-button>
                                 </template>
@@ -142,7 +146,7 @@
             </div>
 
             <div
-                class="md-layout-item md-medium-size-100 md-xsmall-size-33 md-size-33"
+                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
             >
                 <md-card>
                     <md-card-header data-background-color="green">
@@ -167,7 +171,7 @@
                         >
                             <md-button
                                 class="md-raised md-info"
-                                @click="addAmen"
+                                @click="addOption(newAmen, 'AMEN')"
                                 :disabled="!newAmen"
                                 ><i class="fas fa-plus"
                             /></md-button>
@@ -177,7 +181,7 @@
                         <div>
                             <b-table
                                 sort-icon-left
-                                :items="amenities"
+                                :items="amenities.filter(i => i.type == 1)"
                                 :fields="fields"
                                 hover
                                 striped
@@ -197,14 +201,97 @@
 
                                     <md-button
                                         class="md-raised md-danger mr-2"
-                                        @click="deleteAmen(data.item.id)"
+                                        @click="
+                                            deleteOption(data.item.id, 'AMEN')
+                                        "
                                         ><i class="fas fa-trash"></i
                                     ></md-button>
                                 </template>
                             </b-table>
                             <b-pagination
                                 v-model="amenPage"
-                                :total-rows="amenities.length"
+                                :total-rows="
+                                    amenities.filter(i => i.type == 1).length
+                                "
+                                :per-page="perPage"
+                                aria-controls="amenities-list"
+                                style="float:right"
+                            ></b-pagination>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div
+                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
+            >
+                <md-card>
+                    <md-card-header data-background-color="green">
+                        <div
+                            class="md-layout-item md-small-size-100 md-size-100"
+                        >
+                            <h4 class="title">
+                                สิ่งอำนวยความสะดวกเพื่อคนทั้งมวล (Tourism for
+                                All)
+                            </h4>
+                        </div>
+                        <div
+                            class="md-layout-item md-small-size-100 md-size-100"
+                        >
+                            <md-field>
+                                <md-input
+                                    v-model="newAmenFa"
+                                    type="text"
+                                    placeholder="เพิ่มสิ่งอำนวยความสะดวกเพื่อคนทั้งมวล..."
+                                ></md-input>
+                            </md-field>
+                        </div>
+                        <div
+                            class="md-layout-item md-small-size-100 md-size-20"
+                        >
+                            <md-button
+                                class="md-raised md-info"
+                                @click="addOption(newAmenFa, 'AMENFA')"
+                                :disabled="!newAmenFa"
+                                ><i class="fas fa-plus"
+                            /></md-button>
+                        </div>
+                    </md-card-header>
+                    <md-card-content>
+                        <div>
+                            <b-table
+                                sort-icon-left
+                                :items="amenities.filter(i => i.type == 2)"
+                                :fields="fields"
+                                hover
+                                striped
+                                small
+                                id="amenities-list"
+                                :per-page="perPage"
+                                :current-page="amenFaPage"
+                                responsive
+                                style="width: 100%"
+                            >
+                                <template v-slot:cell(btn)="data">
+                                    <md-button
+                                        class="md-raised md-warning mr-2"
+                                        @click="editOption(data.item, 'AMENFA')"
+                                        ><i class="fas fa-edit"></i
+                                    ></md-button>
+
+                                    <md-button
+                                        class="md-raised md-danger mr-2"
+                                        @click="
+                                            deleteAmen(data.item.id, 'AMENFA')
+                                        "
+                                        ><i class="fas fa-trash"></i
+                                    ></md-button>
+                                </template>
+                            </b-table>
+                            <b-pagination
+                                v-model="amenFaPage"
+                                :total-rows="
+                                    amenities.filter(i => i.type == 2).length
+                                "
                                 :per-page="perPage"
                                 aria-controls="amenities-list"
                                 style="float:right"
@@ -251,6 +338,7 @@ export default {
         return {
             currentPage: 1,
             amenPage: 1,
+            amenFaPage: 1,
             actPage: 1,
             perPage: 10,
             apiRoute: `attractions/get-attraction-types`,
@@ -268,6 +356,7 @@ export default {
             newType: null,
             newAct: null,
             newAmen: null,
+            newAmenFa: null,
             fields: [
                 {
                     key: 'name',
@@ -283,16 +372,16 @@ export default {
         }
     },
     methods: {
-        async addType() {
+        async addOption(value, type) {
             var model = {
-                type: 'TYPE',
-                name: this.newType,
+                type: type,
+                name: value,
             }
 
             api.post(this.addRoute, model)
                 .then(result => {
                     this.$swal({
-                        title: 'เพิ่มประเภทแล้ว',
+                        title: 'เพิ่มตัวเลือกแล้ว',
                         icon: 'success',
                         confirmButtonText: 'ตกลง',
                         allowOutsideClick: false,
@@ -309,13 +398,13 @@ export default {
                 })
         },
 
-        async deleteType(id) {
+        async deleteOption(id, type) {
             var model = {
-                type: 'TYPE',
+                type: type,
                 id: id,
             }
             this.$swal({
-                title: 'ยืนยันลบประเภท',
+                title: 'ยืนยันลบตัวเลือก',
                 showDenyButton: true,
                 confirmButtonText: `ยืนยัน`,
                 denyButtonText: `ยกเลิก`,
@@ -325,7 +414,7 @@ export default {
                     api.delete(this.deleteRoute, model)
                         .then(result => {
                             this.$swal({
-                                title: 'ลบตัวเลือกประเภทแล้ว',
+                                title: 'ลบตัวเลือกแล้ว',
                                 icon: 'success',
                                 confirmButtonText: 'ตกลง',
                                 allowOutsideClick: false,
@@ -342,125 +431,6 @@ export default {
                         })
                 }
             })
-        },
-
-        async deleteAmen(id) {
-            var model = {
-                type: 'AMEN',
-                id: id,
-            }
-            this.$swal({
-                title: 'ยืนยันลบสิ่งอำนวยความสะดวก',
-                showDenyButton: true,
-                confirmButtonText: `ยืนยัน`,
-                denyButtonText: `ยกเลิก`,
-                allowOutsideClick: false,
-            }).then(result => {
-                if (result.isConfirmed) {
-                    api.delete(this.deleteRoute, model)
-                        .then(result => {
-                            this.$swal({
-                                title: 'ลบสิ่งอำนวยความสะดวกแล้ว',
-                                icon: 'success',
-                                confirmButtonText: 'ตกลง',
-                                allowOutsideClick: false,
-                            }).then(result => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                    this.fetch()
-                                }
-                            })
-                        })
-                        .catch(err => {
-                            if (err.response.status === 400);
-                            this.$swal(err.response.data, '', 'error')
-                        })
-                }
-            })
-        },
-
-        async deleteAct(id) {
-            var model = {
-                type: 'ACT',
-                id: id,
-            }
-            this.$swal({
-                title: 'ยืนยันลบกิจกรรม',
-                showDenyButton: true,
-                confirmButtonText: `ยืนยัน`,
-                denyButtonText: `ยกเลิก`,
-                allowOutsideClick: false,
-            }).then(result => {
-                if (result.isConfirmed) {
-                    api.delete(this.deleteRoute, model)
-                        .then(result => {
-                            this.$swal({
-                                title: 'ลบกิจกรรมแล้ว',
-                                icon: 'success',
-                                confirmButtonText: 'ตกลง',
-                                allowOutsideClick: false,
-                            }).then(result => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                    this.fetch()
-                                }
-                            })
-                        })
-                        .catch(err => {
-                            if (err.response.status === 400);
-                            this.$swal(err.response.data, '', 'error')
-                        })
-                }
-            })
-        },
-
-        async addAmen() {
-            var model = {
-                type: 'AMEN',
-                name: this.newAmen,
-            }
-            api.post(this.addRoute, model)
-                .then(result => {
-                    this.$swal({
-                        title: 'เพิ่มสิ่งอำนวยความสะดวกแล้ว',
-                        icon: 'success',
-                        confirmButtonText: 'ตกลง',
-                        allowOutsideClick: false,
-                    }).then(result => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            this.fetch()
-                        }
-                    })
-                })
-                .catch(err => {
-                    if (err.response.status === 400);
-                    this.$swal(err.response.data, '', 'error')
-                })
-        },
-        async addAct() {
-            var model = {
-                type: 'ACT',
-                name: this.newAct,
-            }
-            api.post(this.addRoute, model)
-                .then(result => {
-                    this.$swal({
-                        title: 'เพิ่มกิจกรรมแล้ว',
-                        icon: 'success',
-                        confirmButtonText: 'ตกลง',
-                        allowOutsideClick: false,
-                    }).then(result => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            this.fetch()
-                        }
-                    })
-                })
-                .catch(err => {
-                    if (err.response.status === 400);
-                    this.$swal(err.response.data, '', 'error')
-                })
         },
 
         async editOption(option, type) {
