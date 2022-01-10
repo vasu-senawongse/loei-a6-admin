@@ -78,7 +78,7 @@
                                 <template v-slot:cell(btn)="data">
                                     <md-button
                                         class="md-raised md-danger mr-2"
-                                        @click="deleteAttraction(data.item)"
+                                        @click="deleteOrganization(data.item)"
                                         ><i class="fas fa-trash"></i
                                     ></md-button>
                                 </template>
@@ -150,7 +150,7 @@ export default {
         }
     },
     methods: {
-        async deleteAttraction(org) {
+        async deleteOrganization(org) {
             const model = {
                 id: org.id,
             }

@@ -66,19 +66,17 @@
                                         />
                                     </div>
                                 </template>
-                                <template v-slot:cell(type)="data">
-                                    <span>{{
-                                        data.item.type == 1
-                                            ? 'หน่วยงาน อพท.'
-                                            : data.item.type == 2
-                                            ? 'หน่วยงานในจังหวัดเลย'
-                                            : 'หน่วยงานอื่นๆ'
-                                    }}</span>
-                                </template>
+                                <template v-slot:cell(phone)="data">
+                                    <span v-if="data.item.phone">
+                                        <a :href="'tel:' + data.item.phone">{{
+                                            data.item.phone
+                                        }}</a></span
+                                    ></template
+                                >
                                 <template v-slot:cell(btn)="data">
                                     <md-button
                                         class="md-raised md-danger mr-2"
-                                        @click="deleteAttraction(data.item)"
+                                        @click="deleteProduct(data.item)"
                                         ><i class="fas fa-trash"></i
                                     ></md-button>
                                 </template>
@@ -160,7 +158,7 @@ export default {
         }
     },
     methods: {
-        async deleteAttraction(product) {
+        async deleteProduct(product) {
             const model = {
                 id: product.id,
             }
