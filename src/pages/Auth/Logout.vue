@@ -7,7 +7,7 @@ export default {
   },
   mounted() {
     localStorage.removeItem('user');
-    window.location.href = 'http://43.229.149.124:8080';
+    window.location.href = 'http://43.229.149.124';
   },
 };
 </script>
