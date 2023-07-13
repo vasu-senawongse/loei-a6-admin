@@ -1,7 +1,6 @@
 # build stage
 FROM node:lts-alpine as build-stage
-ENV NODE_OPTIONS="--openssl-legacy-provider"
-ENV NODE_OPTIONS="--max-old-space-size=2048"
+ENV NODE_OPTIONS="--openssl-legacy-provider --max-old-space-size=2048"
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
