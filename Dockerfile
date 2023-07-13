@@ -2,7 +2,8 @@
 FROM node:16.17-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+ENV NODE_ENV=production
+RUN npm ci
 COPY . .
 RUN npm run build
 
