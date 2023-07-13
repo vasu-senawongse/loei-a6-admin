@@ -1,5 +1,5 @@
 # build stage
-FROM node:lts-alpine as build-stage
+FROM node:16-alpine as build-stage
 ENV NODE_OPTIONS="--openssl-legacy-provider --max-old-space-size=2048"
 WORKDIR /app
 COPY package*.json ./
