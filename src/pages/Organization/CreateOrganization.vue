@@ -148,7 +148,7 @@ export default {
                             }).then(result => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
-                                    this.$router.push('Organization')
+                                    this.$router.push({ name: 'Organization' })
                                 }
                             })
                         })
